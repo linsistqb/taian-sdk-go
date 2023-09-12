@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	"github.com/yunify/qingcloud-sdk-go/service"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	"github.com/hewenxiang/shanhe-sdk-go/service"
 )
 
 const (

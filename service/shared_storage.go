@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	"github.com/yunify/qingcloud-sdk-go/request"
-	"github.com/yunify/qingcloud-sdk-go/request/data"
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	"github.com/hewenxiang/shanhe-sdk-go/request"
+	"github.com/hewenxiang/shanhe-sdk-go/request/data"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
 )
 
 var _ fmt.State

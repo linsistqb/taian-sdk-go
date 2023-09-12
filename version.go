@@ -16,7 +16,7 @@
 
 // Package sdk is the official QingCloud SDK for the Go programming language.
 //
-// https://github.com/yunify/qingcloud-sdk-go
+// https://github.com/hewenxiang/shanhe-sdk-go
 package sdk
 
 // Version number.

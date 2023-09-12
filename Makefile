@@ -86,7 +86,7 @@ unit-benchmark:
 unit-coverage:
 	@echo "run unit test with coverage"
 	for pkg in ${PKGS_TO_CHECK}; do \
-		output="coverage$${pkg#github.com/yunify/qingcloud-sdk-go}"; \
+		output="coverage$${pkg#github.com/hewenxiang/shanhe-sdk-go}"; \
 		mkdir -p $${output}; \
 		go test -v -cover -coverprofile="$${output}/profile.out" $${pkg}; \
 		if [[ -e "$${output}/profile.out" ]]; then \
@@ -105,8 +105,8 @@ unit-runtime: unit-runtime-go
 export define DOCKERFILE_WITH_GO_VERSION
 FROM golang:GO_VERSION
 
-ADD . /go/src/github.com/yunify/qingcloud-sdk-go
-WORKDIR /go/src/github.com/yunify/qingcloud-sdk-go
+ADD . /go/src/github.com/hewenxiang/shanhe-sdk-go
+WORKDIR /go/src/github.com/hewenxiang/shanhe-sdk-go
 
 CMD ["make", "build", "unit"]
 endef

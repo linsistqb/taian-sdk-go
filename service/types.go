@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
 )
 
 type AccessKey struct {
@@ -597,7 +597,7 @@ type ClusterNode struct {
 	RootUserID                 *string     `json:"root_user_id" name:"root_user_id"`
 	ScaleInService             interface{} `json:"scale_in_service" name:"scale_in_service"`
 	ScaleOutService            interface{} `json:"scale_out_service" name:"scale_out_service"`
-	SecurityGroup              interface{} `json:"security_group" name:"security_group"`
+	SecurityGroup              *string     `json:"security_group" name:"security_group"`
 	ServerID                   *int        `json:"server_id" name:"server_id"`
 	ServerIDUpperBound         *int        `json:"server_id_upper_bound" name:"server_id_upper_bound"`
 	SingleNodeRepl             *string     `json:"single_node_repl" name:"single_node_repl"`
@@ -612,7 +612,6 @@ type ClusterNode struct {
 	VolumeIDs                  *string     `json:"volume_ids" name:"volume_ids"`
 	VolumeType                 *int        `json:"volume_type" name:"volume_type"`
 	VxNetID                    *string     `json:"vxnet_id" name:"vxnet_id"`
-	HostMachine                *string     `json:"host_machine" name:"host_machine"`
 }
 
 func (v *ClusterNode) Validate() error {
@@ -817,22 +816,23 @@ func (v *File) Validate() error {
 }
 
 type Image struct {
-	AppBillingID  *string    `json:"app_billing_id" name:"app_billing_id"`
-	Architecture  *string    `json:"architecture" name:"architecture"`
-	BillingID     *string    `json:"billing_id" name:"billing_id"`
-	CreateTime    *time.Time `json:"create_time" name:"create_time" format:"ISO 8601"`
-	DefaultPasswd *string    `json:"default_passwd" name:"default_passwd"`
-	DefaultUser   *string    `json:"default_user" name:"default_user"`
-	Description   *string    `json:"description" name:"description"`
-	FResetpwd     *int       `json:"f_resetpwd" name:"f_resetpwd"`
-	Feature       *int       `json:"feature" name:"feature"`
-	Features      *int       `json:"features" name:"features"`
-	Hypervisor    *string    `json:"hypervisor" name:"hypervisor"`
-	ImageID       *string    `json:"image_id" name:"image_id"`
-	ImageName     *string    `json:"image_name" name:"image_name"`
-	InstanceIDs   []*string  `json:"instance_ids" name:"instance_ids"`
-	OSFamily      *string    `json:"os_family" name:"os_family"`
-	Owner         *string    `json:"owner" name:"owner"`
+	AppBillingID      *string            `json:"app_billing_id" name:"app_billing_id"`
+	Architecture      *string            `json:"architecture" name:"architecture"`
+	BillingID         *string            `json:"billing_id" name:"billing_id"`
+	CreateTime        *time.Time         `json:"create_time" name:"create_time" format:"ISO 8601"`
+	DefaultPasswd     *string            `json:"default_passwd" name:"default_passwd"`
+	DefaultUser       *string            `json:"default_user" name:"default_user"`
+	Description       *string            `json:"description" name:"description"`
+	FResetpwd         *int               `json:"f_resetpwd" name:"f_resetpwd"`
+	Feature           *int               `json:"feature" name:"feature"`
+	Features          *int               `json:"features" name:"features"`
+	FeaturesSupported *FeaturesSupported `json:"features_supported" name:"features_supported"`
+	Hypervisor        *string            `json:"hypervisor" name:"hypervisor"`
+	ImageID           *string            `json:"image_id" name:"image_id"`
+	ImageName         *string            `json:"image_name" name:"image_name"`
+	InstanceIDs       []*string          `json:"instance_ids" name:"instance_ids"`
+	OSFamily          *string            `json:"os_family" name:"os_family"`
+	Owner             *string            `json:"owner" name:"owner"`
 	// Platform's available values: linux, windows
 	Platform *string `json:"platform" name:"platform"`
 	// ProcessorType's available values: 64bit, 32bit
@@ -851,6 +851,19 @@ type Image struct {
 	UIType           *string `json:"ui_type" name:"ui_type"`
 	// Visibility's available values: public, private
 	Visibility *string `json:"visibility" name:"visibility"`
+}
+type FeaturesSupported struct {
+	DiskHotPlug               *int `json:"disk_hot_plug" name:"disk_hot_plug"`
+	Ipv6Supported             *int `json:"ipv6_supported" name:"ipv6_supported"`
+	JoinMultipleManagedVxnets *int `json:"join_multiple_managed_vxnets" name:"join_multiple_managed_vxnets"`
+	NicHotPlug                *int `json:"nic_hot_plug" name:"nic_hot_plug"`
+	ResetFstab                *int `json:"reset_fstab" name:"reset_fstab"`
+	RootFsRwOffline           *int `json:"root_fs_rw_offline" name:"root_fs_rw_offline"`
+	RootFsRwOnline            *int `json:"root_fs_rw_online" name:"root_fs_rw_online"`
+	SetKeypair                *int `json:"set_keypair" name:"set_keypair"`
+	SetPwd                    *int `json:"set_pwd" name:"set_pwd"`
+	UserData                  *int `json:"user_data" name:"user_data"`
+	WebsshSupported           *int `json:"webssh_supported" name:"webssh_supported"`
 }
 
 func (v *Image) Validate() error {
@@ -1139,6 +1152,13 @@ type InstanceType struct {
 	Status       *string `json:"status" name:"status"`
 	VCPUsCurrent *int    `json:"vcpus_current" name:"vcpus_current"`
 	ZoneID       *string `json:"zone_id" name:"zone_id"`
+
+	InstanceClass *int    `json:"instance_class" name:"instance_class"`
+	ExtraInfo     *string `json:"extra_info" name:"extra_info"`
+}
+type InstanceTypeExtraInfo struct {
+	GpuClass *int `json:"gpu_class" name:"gpu_class"`
+	GpuCount *int `json:"gpu_count" name:"gpu_count"`
 }
 
 func (v *InstanceType) Validate() error {
@@ -1203,7 +1223,6 @@ func (v *InstanceVxNet) Validate() error {
 
 type Job struct {
 	CreateTime  *time.Time `json:"create_time" name:"create_time" format:"ISO 8601"`
-	Directive   *string    `json:"directive" name:"directive"`
 	JobAction   *string    `json:"job_action" name:"job_action"`
 	JobID       *string    `json:"job_id" name:"job_id"`
 	Owner       *string    `json:"owner" name:"owner"`
@@ -2369,6 +2388,7 @@ type Router struct {
 	// TransitionStatus's available values: creating, updating, suspending, resuming, poweroffing, poweroning, deleting
 	TransitionStatus *string  `json:"transition_status" name:"transition_status"`
 	VpcNetwork       *string  `json:"vpc_network" name:"vpc_network"`
+	VpcId            *string  `json:"vpc_id" name:"vpc_id"`
 	VxNets           []*VxNet `json:"vxnets" name:"vxnets"`
 }
 
@@ -2566,6 +2586,7 @@ type RouterVxNet struct {
 	ManagerIP  *string    `json:"manager_ip" name:"manager_ip"`
 	RouterID   *string    `json:"router_id" name:"router_id"`
 	VxNetID    *string    `json:"vxnet_id" name:"vxnet_id"`
+	VxnetName  *string    `json:"vxnet_name" name:"vxnet_name"`
 }
 
 func (v *RouterVxNet) Validate() error {
@@ -2771,6 +2792,7 @@ type SecurityGroup struct {
 	SecurityGroupID   *string     `json:"security_group_id" name:"security_group_id"`
 	SecurityGroupName *string     `json:"security_group_name" name:"security_group_name"`
 	Tags              []*Tag      `json:"tags" name:"tags"`
+	IsTrusted         *int        `json:"is_trusted" name:"is_trusted"`
 }
 
 func (v *SecurityGroup) Validate() error {
@@ -3159,8 +3181,9 @@ type Volume struct {
 	TransitionStatus *string `json:"transition_status" name:"transition_status"`
 	VolumeID         *string `json:"volume_id" name:"volume_id"`
 	VolumeName       *string `json:"volume_name" name:"volume_name"`
-	VolumeType       *int    `json:"volume_type" name:"volume_type"`
-	ZoneID           *string `json:"zone_id" name:"zone_id"`
+	// VolumeType's available values: 0, 1, 2, 3
+	VolumeType *int    `json:"volume_type" name:"volume_type"`
+	ZoneID     *string `json:"zone_id" name:"zone_id"`
 }
 
 func (v *Volume) Validate() error {
@@ -3228,9 +3251,11 @@ func (v *Volume) Validate() error {
 	}
 
 	if v.VolumeType != nil {
-		volumeTypeIsValid := false
+		volumeTypeValidValues := []string{"0", "1", "2", "3"}
 		volumeTypeParameterValue := fmt.Sprint(*v.VolumeType)
-		for _, value := range _volumeTypeValidValues {
+
+		volumeTypeIsValid := false
+		for _, value := range volumeTypeValidValues {
 			if value == volumeTypeParameterValue {
 				volumeTypeIsValid = true
 			}
@@ -3240,7 +3265,7 @@ func (v *Volume) Validate() error {
 			return errors.ParameterValueNotAllowedError{
 				ParameterName:  "VolumeType",
 				ParameterValue: volumeTypeParameterValue,
-				AllowedValues:  _volumeTypeValidValues,
+				AllowedValues:  volumeTypeValidValues,
 			}
 		}
 	}
@@ -3259,9 +3284,8 @@ type VxNet struct {
 	VpcRouterID      *string    `json:"vpc_router_id" name:"vpc_router_id"`
 	VxNetID          *string    `json:"vxnet_id" name:"vxnet_id"`
 	VxNetName        *string    `json:"vxnet_name" name:"vxnet_name"`
-	// VxNetType's available values: 0, 1, 2
-	VxNetType *int    `json:"vxnet_type" name:"vxnet_type"`
-	ZoneID    *string `json:"zone_id" name:"zone_id"`
+	// VxNetType's available values: 0, 1
+	VxNetType *int `json:"vxnet_type" name:"vxnet_type"`
 }
 
 func (v *VxNet) Validate() error {
@@ -3281,7 +3305,7 @@ func (v *VxNet) Validate() error {
 	}
 
 	if v.VxNetType != nil {
-		vxnetTypeValidValues := []string{"0", "1", "2"}
+		vxnetTypeValidValues := []string{"0", "1"}
 		vxnetTypeParameterValue := fmt.Sprint(*v.VxNetType)
 
 		vxnetTypeIsValid := false
@@ -3334,6 +3358,116 @@ func (v *Zone) Validate() error {
 	return nil
 }
 
+type Brokers struct {
+	InstanceID *string `json:"instance_id" name:"instance_id"`
+	BrokerPort *int    `json:"broker_port" name:"broker_port"`
+	BrokerHost *string `json:"broker_host" name:"broker_host"`
+}
+
+func (v *Brokers) Validate() error {
+
+	return nil
+}
+
+type Contract struct {
+	ChargeMode *string `json:"contract" name:"contract"`
+}
+
+type Lease struct {
+	Contract *Contract `json:"contract" name:"contract"`
+}
+
+type DataVolume struct {
+	VolumeType           *int    `json:"volume_type" name:"volume_type"`
+	VolumeSize           *int    `json:"volume_size" name:"volume_size"`
+	VolumeFilesystemType *string `json:"volume_filesystem_type" name:"volume_filesystem_type"`
+}
+type Quota struct {
+	ClusterHpsVolume        *int `json:"cluster_hps_volume" name:"cluster_hps_volume"`
+	WafChecklist            *int `json:"waf_checklist" name:"waf_checklist"`
+	ResourceGroup           *int `json:"resource_group" name:"resource_group"`
+	S2Group                 *int `json:"s2_group" name:"s2_group"`
+	ClusterHpCpu            *int `json:"cluster_hp_cpu" name:"cluster_hp_cpu"`
+	WafChecklistGroup       *int `json:"waf_checklist_group" name:"waf_checklist_group"`
+	Image                   *int `json:"image" name:"image"`
+	WafRule                 *int `json:"waf_rule" name:"waf_rule"`
+	BmInstance              *int `json:"bm_instance" name:"bm_instance"`
+	Cluster                 *int `json:"cluster" name:"cluster"`
+	GpuCpu                  *int `json:"gpu_cpu" name:"gpu_cpu"`
+	Tag_perResource         *int `json:"tag_per_resource" name:"tag_per_resource"`
+	Vbc_eip                 *int `json:"vbc_eip" name:"vbc_eip"`
+	ClusterVolume           *int `json:"cluster_volume" name:"cluster_volume"`
+	S2Server                *int `json:"s2_server" name:"s2_server"`
+	ClusterCpu              *int `json:"cluster_cpu" name:"cluster_cpu"`
+	QsBucket                *int `json:"qs_bucket" name:"qs_bucket"`
+	EtMemory                *int `json:"et_memory" name:"et_memory"`
+	AutoscalingPolicy       *int `json:"autoscaling_policy" name:"autoscaling_policy"`
+	Span                    *int `json:"span" name:"span"`
+	ClusterHpsVolumeSize    *int `json:"cluster_hps_volume_size" name:"cluster_hps_volume_size"`
+	MultizoneVxnet          *int `json:"multizone_vxnet" name:"multizone_vxnet"`
+	HcsVolumeSize           *int `json:"hcs_volume_size" name:"hcs_volume_size"`
+	RoutingTable            *int `json:"routing_table" name:"routing_table"`
+	Ipv6Eip                 *int `json:"ipv6_eip" name:"ipv6_eip"`
+	WafRuleGroup            *int `json:"waf_rule_group" name:"waf_rule_group"`
+	Instance                *int `json:"instance" name:"instance"`
+	EtCpu                   *int `json:"et_cpu" name:"et_cpu"`
+	HpsVolume               *int `json:"hps_volume" name:"hps_volume"`
+	GpuPassthrough          *int `json:"gpu_passthrough" name:"gpu_passthrough"`
+	Memory                  *int `json:"memory" name:"memory"`
+	HpGpuPassthrough        *int `json:"hp_gpu_passthrough" name:"hp_gpu_passthrough"`
+	ClusterBmInstance       *int `json:"cluster_bm_instance" name:"cluster_bm_instance"`
+	HcsVolume               *int `json:"hcs_volume" name:"hcs_volume"`
+	GroupRole               *int `json:"group_role" name:"group_role"`
+	ClusterHpGpuPassthrough *int `json:"cluster_hp_gpu_passthrough" name:"cluster_hp_gpu_passthrough"`
+	StMemory                *int `json:"st_memory" name:"st_memory"`
+	StCpu                   *int `json:"st_cpu" name:"st_cpu"`
+	ClusterHcVolume         *int `json:"cluster_hc_volume" name:"cluster_hc_volume"`
+	S2SharedTarget          *int `json:"s2_shared_target" name:"s2_shared_target"`
+	HpsVolumeSize           *int `json:"hps_volume_size" name:"hps_volume_size"`
+	ClusterGpuPassthrough   *int `json:"cluster_gpu_passthrough" name:"cluster_gpu_passthrough"`
+	MultizoneLoadbalancer   *int `json:"multizone_loadbalancer" name:"multizone_loadbalancer"`
+	Scheduler               *int `json:"scheduler" name:"scheduler"`
+	ClusterHppVolumeSize    *int `json:"cluster_hpp_volume_size" name:"cluster_hpp_volume_size"`
+	HppS2Server             *int `json:"hpp_s2_server" name:"hpp_s2_server"`
+	AlarmPolicy             *int `json:"alarm_policy" name:"alarm_policy"`
+	EipBandwidth            *int `json:"eip_bandwidth" name:"eip_bandwidth"`
+	GpuMemory               *int `json:"gpu_memory" name:"gpu_memory"`
+	WafDomainPolicy         *int `json:"waf_domain_policy" name:"waf_domain_policy"`
+	HpDedicatedHostGroup    *int `json:"hp_dedicated_host_group" name:"hp_dedicated_host_group"`
+	UserGroup               *int `json:"user_group" name:"user_group"`
+	EtInstance              *int `json:"et_instance" name:"et_instance"`
+	S2Account               *int `json:"s2_account" name:"s2_account"`
+	ClusterMaxNodeCnt       *int `json:"cluster_max_node_cnt" name:"cluster_max_node_cnt"`
+	Eip                     *int `json:"eip" name:"eip"`
+	ClusterVolumeSize       *int `json:"cluster_volume_size" name:"cluster_volume_size"`
+	ClusterHcVolumeSize     *int `json:"cluster_hc_volume_size" name:"cluster_hc_volume_size"`
+	SecurityGroupIpset      *int `json:"security_group_ipset" name:"security_group_ipset"`
+	NetworkAclEntry         *int `json:"network_acl_entry" name:"network_acl_entry"`
+	LoadbalancerPolicy      *int `json:"loadbalancer_policy" name:"loadbalancer_policy"`
+	StInstance              *int `json:"st_instance" name:"st_instance"`
+	InstanceGroup           *int `json:"instance_group" name:"instance_group"`
+	DedicatedHostGroup      *int `json:"dedicated_host_group" name:"dedicated_host_group"`
+	DedicatedHost           *int `json:"dedicated_host" name:"dedicated_host"`
+	Cpu                     *int `json:"cpu" name:"cpu"`
+	Nfv                     *int `json:"nfv" name:"nfv"`
+	Tag                     *int `json:"tag" name:"tag"`
+	IntranetRouter          *int `json:"intranet_router" name:"intranet_router"`
+	Vxnet                   *int `json:"vxnet" name:"vxnet"`
+	Keypair                 *int `json:"keypair" name:"keypair"`
+	ClusterHpMemory         *int `json:"cluster_hp_memory" name:"cluster_hp_memory"`
+	Router                  *int `json:"router" name:"router"`
+	HpDedicatedHost         *int `json:"hp_dedicated_host" name:"hp_dedicated_host"`
+	NetworkAcl              *int `json:"network_acl" name:"network_acl"`
+	ClusterInstance         *int `json:"cluster_instance" name:"cluster_instance"`
+	DnsAlias                *int `json:"dns_alias" name:"dns_alias"`
+	Loadbalancer            *int `json:"loadbalancer" name:"loadbalancer"`
+	ClusterHpInstance       *int `json:"cluster_hp_instance" name:"cluster_hp_instance"`
+}
+
+type ZoneLeftUse struct {
+	Jn1 *int `json:"jn1" name:"jn1"`
+	Jn2 *int `json:"jn2" name:"jn1"`
+}
 type VIP struct {
 	VIPID        *string `json:"vip_id" name:"vip_id"`
 	VIPName      *string `json:"vip_name" name:"vip_name"`

@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	"github.com/yunify/qingcloud-sdk-go/request"
-	"github.com/yunify/qingcloud-sdk-go/request/data"
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	"github.com/hewenxiang/shanhe-sdk-go/request"
+	"github.com/hewenxiang/shanhe-sdk-go/request/data"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
 )
 
 var _ fmt.State
@@ -595,10 +595,16 @@ type RunInstancesInput struct {
 	UserdataFile  *string `json:"userdata_file" name:"userdata_file" default:"/etc/rc.local" location:"params"`
 	UserdataPath  *string `json:"userdata_path" name:"userdata_path" default:"/etc/qingcloud/userdata" location:"params"`
 	// UserdataType's available values: plain, exec, tar
-	UserdataType  *string   `json:"userdata_type" name:"userdata_type" location:"params"`
-	UserdataValue *string   `json:"userdata_value" name:"userdata_value" location:"params"`
-	Volumes       []*string `json:"volumes" name:"volumes" location:"params"`
-	VxNets        []*string `json:"vxnets" name:"vxnets" location:"params"`
+	UserdataType  *string       `json:"userdata_type" name:"userdata_type" location:"params"`
+	UserdataValue *string       `json:"userdata_value" name:"userdata_value" location:"params"`
+	Volumes       []*string     `json:"volumes" name:"volumes" location:"params"`
+	VxNets        []*string     `json:"vxnets" name:"vxnets" location:"params"`
+	Months        *int          `json:"months" name:"months" location:"params"`
+	AutoRenew     *int          `json:"auto_renew" name:"auto_renew" location:"params"`
+	AutoVolumes   []*DataVolume `json:"auto_volumes" name:"auto_volumes" location:"params"`
+	ChargeMode    *string       `json:"charge_mode" name:"charge_mode" location:"params"`
+	GpuClass      *int          `json:"gpu_class" name:"gpu_class" location:"params"`
+	PlaceGroupID  *string       `json:"place_group_id" name:"place_group_id" location:"params"`
 }
 
 func (v *RunInstancesInput) Validate() error {
@@ -671,7 +677,7 @@ func (v *RunInstancesInput) Validate() error {
 	}
 
 	if v.InstanceClass != nil {
-		instanceClassValidValues := []string{"0", "1", "2", "3", "4", "5", "6", "100", "101", "200", "201", "300", "301"}
+		instanceClassValidValues := []string{"0", "1", "2", "3", "4", "5", "6", "100", "101", "200", "201", "300", "301", "1002", "1003"}
 		instanceClassParameterValue := fmt.Sprint(*v.InstanceClass)
 
 		instanceClassIsValid := false
@@ -996,4 +1002,299 @@ type TerminateInstancesOutput struct {
 	Action  *string `json:"action" name:"action" location:"elements"`
 	JobID   *string `json:"job_id" name:"job_id" location:"elements"`
 	RetCode *int    `json:"ret_code" name:"ret_code" location:"elements"`
+}
+
+// Documentation URL: https://docs.qingcloud.com/api/instance/reset_instances.html
+func (s *InstanceService) ResetLoginPasswd(i *ResetLoginPasswdInput) (*ResetLoginPasswdOutput, error) {
+	if i == nil {
+		i = &ResetLoginPasswdInput{}
+	}
+	o := &data.Operation{
+		Config:        s.Config,
+		Properties:    s.Properties,
+		APIName:       "ResetLoginPasswd",
+		RequestMethod: "GET",
+	}
+
+	x := &ResetLoginPasswdOutput{}
+	r, err := request.New(o, i, x)
+	if err != nil {
+		return nil, err
+	}
+
+	err = r.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return x, err
+}
+
+type ResetLoginPasswdInput struct {
+	Instances []*string `json:"instances" name:"instances" location:"params"` // Required
+
+	LoginPasswd *string `json:"login_passwd" name:"login_passwd" location:"params"`
+}
+
+func (v *ResetLoginPasswdInput) Validate() error {
+
+	if len(v.Instances) == 0 {
+		return errors.ParameterRequiredError{
+			ParameterName: "Instances",
+			ParentName:    "ResetInstancesInput",
+		}
+	}
+
+	if len(*v.LoginPasswd) == 0 {
+		return errors.ParameterRequiredError{
+			ParameterName: "LoginPasswd",
+			ParentName:    "ResetInstancesInput",
+		}
+	}
+
+	return nil
+}
+
+type ResetLoginPasswdOutput struct {
+	Message *string `json:"message" name:"message"`
+	Action  *string `json:"action" name:"action" location:"elements"`
+	JobID   *string `json:"job_id" name:"job_id" location:"elements"`
+	RetCode *int    `json:"ret_code" name:"ret_code" location:"elements"`
+}
+
+func (s *InstanceService) GetLeaseInfos(i *GetLeaseInfosInput) (*GetLeaseInfosOutput, error) {
+	if i == nil {
+		i = &GetLeaseInfosInput{}
+	}
+	o := &data.Operation{
+		Config:        s.Config,
+		Properties:    s.Properties,
+		APIName:       "GetLeaseInfos",
+		RequestMethod: "POST",
+	}
+
+	x := &GetLeaseInfosOutput{}
+	r, err := request.New(o, i, x)
+	if err != nil {
+		return nil, err
+	}
+
+	err = r.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return x, err
+}
+
+type GetLeaseInfosInput struct {
+	Resources []*string `json:"instances" name:"resources" location:"params"` // Required
+
+}
+
+func (v *GetLeaseInfosInput) Validate() error {
+
+	if len(v.Resources) == 0 {
+		return errors.ParameterRequiredError{
+			ParameterName: "resources",
+			ParentName:    "GetLeaseInfosInput",
+		}
+	}
+
+	return nil
+}
+
+type GetLeaseInfosOutput struct {
+	Message      *string   `json:"message" name:"message"`
+	Action       *string   `json:"action" name:"action" location:"elements"`
+	LeaseInfoSet []*Lease  `json:"lease_info_set" name:"lease_info_set" location:"elements"`
+	RetCode      *int      `json:"ret_code" name:"ret_code" location:"elements"`
+	Resources    []*string `json:"resources" name:"resources" location:"elements"`
+}
+
+func (s *InstanceService) ModifyAutoRenew(i *ModifyAutoRenewInput) (*ModifyAutoRenewOutput, error) {
+	if i == nil {
+		i = &ModifyAutoRenewInput{}
+	}
+	o := &data.Operation{
+		Config:        s.Config,
+		Properties:    s.Properties,
+		APIName:       "GetLeaseInfos",
+		RequestMethod: "POST",
+	}
+
+	x := &ModifyAutoRenewOutput{}
+	r, err := request.New(o, i, x)
+	if err != nil {
+		return nil, err
+	}
+
+	err = r.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return x, err
+}
+
+type ModifyAutoRenewInput struct {
+	Resource  *string `json:"instances" name:"Resource" location:"params"` // Required
+	AutoRenew *int    `json:"instances" name:"auto_renew" location:"params"`
+}
+
+func (v *ModifyAutoRenewInput) Validate() error {
+
+	if v.Resource == nil {
+		return errors.ParameterRequiredError{
+			ParameterName: "resource",
+			ParentName:    "ModifyAutoRenewInput",
+		}
+	}
+
+	return nil
+}
+
+type ModifyAutoRenewOutput struct {
+	Message *string   `json:"message" name:"message"`
+	Action  *string   `json:"action" name:"action" location:"elements"`
+	Failed  []*string `json:"failed" name:"failed" location:"elements"`
+	RetCode *int      `json:"ret_code" name:"ret_code" location:"elements"`
+	Success []*string `json:"success" name:"success" location:"elements"`
+}
+
+func (self DescribeInstancesOutput) GetMessage() string {
+	return StringValue(self.Message)
+}
+func (self DescribeInstancesOutput) GetAction() string {
+	return StringValue(self.Action)
+}
+func (self DescribeInstancesOutput) GetRetCode() int {
+	return IntValue(self.RetCode)
+}
+func (self DescribeInstancesOutput) GetInstanceSet() []Instance {
+	return InstanceValueSlice(self.InstanceSet)
+}
+func (self DescribeInstancesOutput) GetTotalCount() int {
+	return IntValue(self.TotalCount)
+}
+
+func (self Instance) GetInstanceID() string {
+	return StringValue(self.InstanceID)
+}
+func (self Instance) GetCPUTopology() string {
+	return StringValue(self.CPUTopology)
+}
+func (self Instance) GetDevice() string {
+	return StringValue(self.Device)
+}
+func (self Instance) GetGraphicsPasswd() string {
+	return StringValue(self.GraphicsPasswd)
+}
+func (self Instance) GetGraphicsProtocol() string {
+	return StringValue(self.GraphicsProtocol)
+}
+func (self Instance) GetCreateTime() time.Time {
+	return TimeValue(self.CreateTime)
+}
+func (self Instance) GetDNSAliases() []DNSAlias {
+	return DNSAliasValueSlice(self.DNSAliases)
+}
+func (self Instance) GetEIP() EIP {
+	return EIPValue(self.EIP)
+}
+func (self Instance) GetInstanceDescription() string {
+	return StringValue(self.Description)
+}
+func (self Instance) GetExtra() Extra {
+	return ExtraValue(self.Extra)
+}
+func (self Instance) GetInstanceClass() int {
+	return IntValue(self.InstanceClass)
+}
+func (self Instance) GetMemoryCurrent() int {
+	return IntValue(self.MemoryCurrent)
+}
+func (self Instance) GetInstancetype() string {
+	return StringValue(self.InstanceType)
+}
+func (self Instance) GetInstanceImage() Image {
+	return ImageValue(self.Image)
+}
+
+func (self Instance) GetKeyPairIDs() []string {
+	return StringValueSlice(self.KeyPairIDs)
+}
+
+func (self Instance) GetInstanceName() string {
+	return StringValue(self.InstanceName)
+}
+
+func (self Instance) GetRepl() string {
+	return StringValue(self.Repl)
+}
+
+func (self Instance) GetTransitionStatus() string {
+	return StringValue(self.TransitionStatus)
+}
+
+func (self Instance) GetZoneID() string {
+	return StringValue(self.ZoneID)
+}
+
+func (self Instance) GetVolumeIDs() []string {
+	return StringValueSlice(self.VolumeIDs)
+}
+
+func (self Instance) GetSubCode() int {
+	return IntValue(self.SubCode)
+}
+
+func (self Instance) GetInstancestatus() string {
+	return StringValue(self.Status)
+}
+
+func (self Instance) GetStatusTime() time.Time {
+	return TimeValue(self.StatusTime)
+}
+
+func (self Instance) GetVCPUsCurrent() int {
+	return IntValue(self.VCPUsCurrent)
+}
+
+func (self Instance) GetVolumes() []Volume {
+	return VolumeValueSlice(self.Volumes)
+}
+func (self Instance) GetInstanceTags() []Tag {
+	return TagValueSlice(self.Tags)
+}
+func (self Instance) GetSecurityGroup() SecurityGroup {
+	return SecurityGroupValue(self.SecurityGroup)
+}
+func (self Instance) GetVxNets() []NICVxNet {
+	return NICVxNetValueSlice(self.VxNets)
+}
+func (self DescribeInstanceTypesOutput) GetInstanceTypeSet() []InstanceType {
+	return InstanceTypeValueSlice(self.InstanceTypeSet)
+}
+func (self InstanceType) GetMemoryCurrent() int {
+	return IntValue(self.MemoryCurrent)
+}
+
+func (self InstanceType) GetInstanceTypeDescription() string {
+	return StringValue(self.Description)
+}
+func (self InstanceType) GetInstanceTypeID() string {
+	return StringValue(self.InstanceTypeID)
+}
+func (self InstanceType) GetInstanceTypeName() string {
+	return StringValue(self.InstanceTypeName)
+}
+func (self InstanceType) GetInstanceTypeStatus() string {
+	return StringValue(self.Status)
+}
+func (self InstanceType) GetVCPUsCurrent() int {
+	return IntValue(self.VCPUsCurrent)
+}
+func (self InstanceType) GetInstanceTypeZoneID() string {
+	return StringValue(self.ZoneID)
 }

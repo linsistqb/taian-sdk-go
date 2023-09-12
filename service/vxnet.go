@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	"github.com/yunify/qingcloud-sdk-go/request"
-	"github.com/yunify/qingcloud-sdk-go/request/data"
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	"github.com/hewenxiang/shanhe-sdk-go/request"
+	"github.com/hewenxiang/shanhe-sdk-go/request/data"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
 )
 
 var _ fmt.State
@@ -259,10 +259,9 @@ type DescribeVxNetsInput struct {
 	Tags       []*string `json:"tags" name:"tags" location:"params"`
 	// Verbose's available values: 0, 1
 	Verbose *int `json:"verbose" name:"verbose" default:"0" location:"params"`
-	// VxNetType's available values: 0, 1, 2
+	// VxNetType's available values: 0, 1
 	VxNetType *int      `json:"vxnet_type" name:"vxnet_type" location:"params"`
 	VxNets    []*string `json:"vxnets" name:"vxnets" location:"params"`
-	Zone      *string   `json:"zone" name:"zone" location:"params"`
 }
 
 func (v *DescribeVxNetsInput) Validate() error {
@@ -288,7 +287,7 @@ func (v *DescribeVxNetsInput) Validate() error {
 	}
 
 	if v.VxNetType != nil {
-		vxnetTypeValidValues := []string{"0", "1", "2"}
+		vxnetTypeValidValues := []string{"0", "1"}
 		vxnetTypeParameterValue := fmt.Sprint(*v.VxNetType)
 
 		vxnetTypeIsValid := false

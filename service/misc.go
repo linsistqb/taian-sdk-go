@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	"github.com/yunify/qingcloud-sdk-go/request"
-	"github.com/yunify/qingcloud-sdk-go/request/data"
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	"github.com/hewenxiang/shanhe-sdk-go/request"
+	"github.com/hewenxiang/shanhe-sdk-go/request/data"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
 )
 
 var _ fmt.State
@@ -35,10 +35,11 @@ type MiscService struct {
 }
 
 type MiscServiceProperties struct {
+	Zone *string `json:"zone" name:"zone"` // Required
 }
 
-func (s *QingCloudService) Misc() (*MiscService, error) {
-	properties := &MiscServiceProperties{}
+func (s *QingCloudService) Misc(zone string) (*MiscService, error) {
+	properties := &MiscServiceProperties{Zone: &zone}
 
 	return &MiscService{Config: s.Config, Properties: properties}, nil
 }
@@ -71,17 +72,9 @@ func (s *MiscService) GetQuotaLeft(i *GetQuotaLeftInput) (*GetQuotaLeftOutput, e
 
 type GetQuotaLeftInput struct {
 	ResourceTypes []*string `json:"resource_types" name:"resource_types" location:"params"`
-	Zone          *string   `json:"zone" name:"zone" location:"params"` // Required
 }
 
 func (v *GetQuotaLeftInput) Validate() error {
-
-	if v.Zone == nil {
-		return errors.ParameterRequiredError{
-			ParameterName: "Zone",
-			ParentName:    "GetQuotaLeftInput",
-		}
-	}
 
 	return nil
 }
@@ -146,4 +139,46 @@ type GetResourceLimitOutput struct {
 	Step           *int            `json:"step" name:"step" location:"elements"`
 	VxNetSubnets   []*string       `json:"vxnet_subnets" name:"vxnet_subnets" location:"elements"`
 	VxNetVersion   *int            `json:"vxnet_version" name:"vxnet_version" location:"elements"`
+}
+
+func (s *MiscService) DescribeQuotas(i *DescribeQuotasInput) (*DescribeQuotasOutput, error) {
+	if i == nil {
+		i = &DescribeQuotasInput{}
+	}
+	o := &data.Operation{
+		Config:        s.Config,
+		Properties:    s.Properties,
+		APIName:       "DescribeQuotas",
+		RequestMethod: "GET",
+	}
+
+	x := &DescribeQuotasOutput{}
+	r, err := request.New(o, i, x)
+	if err != nil {
+		return nil, err
+	}
+
+	err = r.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return x, err
+}
+
+type DescribeQuotasInput struct {
+	Zone *string `json:"zone" name:"zone" location:"params"`
+}
+
+func (v *DescribeQuotasInput) Validate() error {
+
+	return nil
+}
+
+type DescribeQuotasOutput struct {
+	Message    *string  `json:"message" name:"message"`
+	Action     *string  `json:"action" name:"action" location:"elements"`
+	QuotaSet   []*Quota `json:"quota_set" name:"quota_set" location:"elements"`
+	RetCode    *int     `json:"ret_code" name:"ret_code" location:"elements"`
+	TotalCount *int     `json:"total_count" name:"total_count" location:"elements"`
 }

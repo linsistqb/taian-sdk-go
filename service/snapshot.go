@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	"github.com/yunify/qingcloud-sdk-go/request"
-	"github.com/yunify/qingcloud-sdk-go/request/data"
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	"github.com/hewenxiang/shanhe-sdk-go/request"
+	"github.com/hewenxiang/shanhe-sdk-go/request/data"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
 )
 
 var _ fmt.State
@@ -217,7 +217,7 @@ func (v *CreateSnapshotsInput) Validate() error {
 type CreateSnapshotsOutput struct {
 	Message   *string   `json:"message" name:"message"`
 	Action    *string   `json:"action" name:"action" location:"elements"`
-	JobID     *string   `json:"job_id" name:"job_id" location:"elements"`
+	JobID     []*string `json:"job_id" name:"job_id" location:"elements"`
 	RetCode   *int      `json:"ret_code" name:"ret_code" location:"elements"`
 	Snapshots []*string `json:"snapshots" name:"snapshots" location:"elements"`
 }
@@ -363,8 +363,7 @@ type DescribeSnapshotsInput struct {
 	Status       []*string `json:"status" name:"status" location:"params"`
 	Tags         []*string `json:"tags" name:"tags" location:"params"`
 	// Verbose's available values: 0, 1
-	Verbose      *int    `json:"verbose" name:"verbose" default:"0" location:"params"`
-	SnapshotName *string `json:"snapshot_name" name:"snapshot_name" location:"params"`
+	Verbose *int `json:"verbose" name:"verbose" default:"0" location:"params"`
 }
 
 func (v *DescribeSnapshotsInput) Validate() error {
@@ -468,4 +467,92 @@ type ModifySnapshotAttributesOutput struct {
 	Message *string `json:"message" name:"message"`
 	Action  *string `json:"action" name:"action" location:"elements"`
 	RetCode *int    `json:"ret_code" name:"ret_code" location:"elements"`
+}
+
+func (self Snapshot) GetResource() Resource {
+	return ResourceValue(self.Resource)
+}
+
+// SnapshotResource   *SnapshotResource `json:"snapshot_resource" name:"snapshot_resource"`
+
+func (self Snapshot) GetParentID() string {
+	return StringValue(self.ParentID)
+}
+func (self Snapshot) GetSnapshotDescription() string {
+	return StringValue(self.Description)
+}
+func (self Snapshot) GetProvider() string {
+	return StringValue(self.Provider)
+}
+func (self Snapshot) GetRootID() string {
+	return StringValue(self.RootID)
+}
+
+func (self Snapshot) GetSnapshotID() string {
+	return StringValue(self.SnapshotID)
+}
+func (self Snapshot) GetSnapshotName() string {
+	return StringValue(self.SnapshotName)
+}
+func (self Snapshot) GetSnapshotStatus() string {
+	return StringValue(self.Status)
+}
+
+func (self Snapshot) GetTransitionStatus() string {
+	return StringValue(self.TransitionStatus)
+}
+func (self Snapshot) GetVisibility() string {
+	return StringValue(self.Visibility)
+}
+func (self Snapshot) GetSnapshotResource() SnapshotResource {
+	return SnapshotResourceValue(self.SnapshotResource)
+}
+func (self Snapshot) GetSnapshotTags() []Tag {
+	return TagValueSlice(self.Tags)
+}
+func (self Snapshot) GetHeadChain() int {
+	return IntValue(self.HeadChain)
+}
+func (self Snapshot) GetCreateTime() time.Time {
+	return TimeValue(self.CreateTime)
+}
+
+func (self Snapshot) GetIsTaken() int {
+	return IntValue(self.IsTaken)
+}
+func (self Snapshot) GetSnapshotSize() int {
+	return IntValue(self.Size)
+}
+func (self Snapshot) GetSnapshotType() int {
+	return IntValue(self.SnapshotType)
+}
+func (self Snapshot) GetSubCode() int {
+	return IntValue(self.SubCode)
+}
+func (self Snapshot) GetTotalCount() int {
+	return IntValue(self.TotalCount)
+}
+func (self Snapshot) GetTotalSize() int {
+	return IntValue(self.TotalSize)
+}
+func (self Snapshot) GetVirtualSize() int {
+	return IntValue(self.VirtualSize)
+}
+func (self Snapshot) GetLatestSnapshotTime() time.Time {
+	return TimeValue(self.LatestSnapshotTime)
+}
+func (self Snapshot) GetSnapshotTime() time.Time {
+	return TimeValue(self.SnapshotTime)
+}
+func (self Snapshot) GetStatusTime() time.Time {
+	return TimeValue(self.StatusTime)
+}
+func (self Resource) GetResourceID() string {
+	return StringValue(self.ResourceID)
+}
+func (self Resource) GetResourceName() string {
+	return StringValue(self.ResourceName)
+}
+func (self Resource) GetResourceType() string {
+	return StringValue(self.ResourceType)
 }

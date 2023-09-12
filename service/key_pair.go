@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	"github.com/yunify/qingcloud-sdk-go/request"
-	"github.com/yunify/qingcloud-sdk-go/request/data"
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	"github.com/hewenxiang/shanhe-sdk-go/request"
+	"github.com/hewenxiang/shanhe-sdk-go/request/data"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
 )
 
 var _ fmt.State
@@ -421,4 +421,42 @@ type ModifyKeyPairAttributesOutput struct {
 	Message *string `json:"message" name:"message"`
 	Action  *string `json:"action" name:"action" location:"elements"`
 	RetCode *int    `json:"ret_code" name:"ret_code" location:"elements"`
+}
+
+func (self DescribeKeyPairsOutput) GetKeyPairSet() []KeyPair {
+	return KeyPairValueSlice(self.KeyPairSet)
+}
+
+func (self KeyPair) GetKeyPairID() string {
+	return StringValue(self.KeyPairID)
+}
+func (self KeyPair) GetEncryptMethod() string {
+	return StringValue(self.EncryptMethod)
+}
+func (self KeyPair) GetKeyPairDescription() string {
+	return StringValue(self.Description)
+}
+func (self KeyPair) GetKeyPairName() string {
+	return StringValue(self.KeyPairName)
+}
+func (self KeyPair) GetInstanceIDs() []string {
+	return StringValueSlice(self.InstanceIDs)
+}
+func (self KeyPair) GetOwner() string {
+	return StringValue(self.Owner)
+}
+func (self KeyPair) GetPrivKey() string {
+	return StringValue(self.PrivKey)
+}
+func (self KeyPair) GetPubKey() string {
+	return StringValue(self.PubKey)
+}
+func (self KeyPair) GetResourceIDs() []string {
+	return StringValueSlice(self.ResourceIDs)
+}
+func (self KeyPair) GetKeyPairTags() []Tag {
+	return TagValueSlice(self.Tags)
+}
+func (self KeyPair) GetCreateTime() time.Time {
+	return TimeValue(self.CreateTime)
 }

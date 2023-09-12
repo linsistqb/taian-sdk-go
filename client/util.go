@@ -2,10 +2,11 @@ package client
 
 import (
 	"fmt"
-	"github.com/yunify/qingcloud-sdk-go/logger"
-	"github.com/yunify/qingcloud-sdk-go/service"
-	"github.com/yunify/qingcloud-sdk-go/utils"
 	"time"
+
+	"github.com/hewenxiang/shanhe-sdk-go/logger"
+	"github.com/hewenxiang/shanhe-sdk-go/service"
+	"github.com/hewenxiang/shanhe-sdk-go/utils"
 )
 
 // WaitJob wait the job with this jobID finish

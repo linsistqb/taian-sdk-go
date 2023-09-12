@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	"github.com/yunify/qingcloud-sdk-go/request"
-	"github.com/yunify/qingcloud-sdk-go/request/data"
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	"github.com/hewenxiang/shanhe-sdk-go/request"
+	"github.com/hewenxiang/shanhe-sdk-go/request/data"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
 )
 
 var _ fmt.State
@@ -238,7 +238,6 @@ type DescribeImagesInput struct {
 	Provider   *string   `json:"provider" name:"provider" location:"params"`
 	SearchWord *string   `json:"search_word" name:"search_word" location:"params"`
 	Status     []*string `json:"status" name:"status" location:"params"`
-	Tags       []*string `json:"tags" name:"tags" location:"params"`
 	// Verbose's available values: 0
 	Verbose *int `json:"verbose" name:"verbose" default:"0" location:"params"`
 	// Visibility's available values: public, private
@@ -268,7 +267,7 @@ func (v *DescribeImagesInput) Validate() error {
 	}
 
 	if v.Provider != nil {
-		providerValidValues := []string{"system", "self", "shared"}
+		providerValidValues := []string{"system", "self"}
 		providerParameterValue := fmt.Sprint(*v.Provider)
 
 		providerIsValid := false
@@ -499,4 +498,119 @@ type RevokeImageFromUsersOutput struct {
 	Message *string `json:"message" name:"message"`
 	Action  *string `json:"action" name:"action" location:"elements"`
 	RetCode *int    `json:"ret_code" name:"ret_code" location:"elements"`
+}
+
+func (self DescribeImagesOutput) GetMessage() string {
+	return StringValue(self.Message)
+}
+func (self DescribeImagesOutput) GetAction() string {
+	return StringValue(self.Action)
+}
+func (self DescribeImagesOutput) GetRetCode() int {
+	return IntValue(self.RetCode)
+}
+func (self DescribeImagesOutput) GetImageSet() []Image {
+	return ImageValueSlice(self.ImageSet)
+}
+func (self DescribeImagesOutput) GetTotalCount() int {
+	return IntValue(self.TotalCount)
+}
+
+func (self Image) GetImageID() string {
+	return StringValue(self.ImageID)
+}
+func (self Image) GetAppBillingID() string {
+	return StringValue(self.AppBillingID)
+}
+func (self Image) GetArchitecture() string {
+	return StringValue(self.Architecture)
+}
+func (self Image) GetBillingID() string {
+	return StringValue(self.BillingID)
+}
+func (self Image) GetCreateTime() time.Time {
+	return TimeValue(self.CreateTime)
+}
+func (self Image) GetDefaultPasswd() string {
+	return StringValue(self.DefaultPasswd)
+}
+func (self Image) GetDefaultUser() string {
+	return StringValue(self.DefaultUser)
+}
+func (self Image) GetImageDescription() string {
+	return StringValue(self.Description)
+}
+func (self Image) GetFResetpwd() int {
+	return IntValue(self.FResetpwd)
+}
+func (self Image) GetFeature() int {
+	return IntValue(self.Feature)
+}
+func (self Image) GetFeatures() int {
+	return IntValue(self.Features)
+}
+func (self Image) GetHypervisor() string {
+	return StringValue(self.Hypervisor)
+}
+func (self Image) GetImageName() string {
+	return StringValue(self.ImageName)
+}
+
+func (self Image) GetInstanceIDs() []string {
+	return StringValueSlice(self.InstanceIDs)
+}
+
+func (self Image) GetOSFamily() string {
+	return StringValue(self.OSFamily)
+}
+
+func (self Image) GetOwner() string {
+	return StringValue(self.Owner)
+}
+
+func (self Image) GetPlatform() string {
+	return StringValue(self.Platform)
+}
+
+func (self Image) GetProcessorType() string {
+	return StringValue(self.ProcessorType)
+}
+
+func (self Image) GetProvider() string {
+	return StringValue(self.Provider)
+}
+
+func (self Image) GetRecommendedType() string {
+	return StringValue(self.RecommendedType)
+}
+
+func (self Image) GetRootID() string {
+	return StringValue(self.RootID)
+}
+
+func (self Image) GetSize() int {
+	return IntValue(self.Size)
+}
+
+func (self Image) GetImagestatus() string {
+	return StringValue(self.Status)
+}
+
+func (self Image) GetStatusTime() time.Time {
+	return TimeValue(self.StatusTime)
+}
+
+func (self Image) GetSubCode() int {
+	return IntValue(self.SubCode)
+}
+
+func (self Image) GetTransitionStatus() string {
+	return StringValue(self.TransitionStatus)
+}
+
+func (self Image) GetUIType() string {
+	return StringValue(self.UIType)
+}
+func (self Image) GetVisibility() string {
+	return StringValue(self.Visibility)
 }

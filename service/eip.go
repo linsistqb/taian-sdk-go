@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	"github.com/yunify/qingcloud-sdk-go/request"
-	"github.com/yunify/qingcloud-sdk-go/request/data"
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	"github.com/hewenxiang/shanhe-sdk-go/request"
+	"github.com/hewenxiang/shanhe-sdk-go/request/data"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
 )
 
 var _ fmt.State
@@ -535,4 +535,67 @@ type ReleaseEIPsOutput struct {
 	Action  *string `json:"action" name:"action" location:"elements"`
 	JobID   *string `json:"job_id" name:"job_id" location:"elements"`
 	RetCode *int    `json:"ret_code" name:"ret_code" location:"elements"`
+}
+
+// AlarmStatus   *string `json:"alarm_status" name:"alarm_status"`
+// 	AssociateMode *int    `json:"associate_mode" name:"associate_mode"`
+// 	Bandwidth     *int    `json:"bandwidth" name:"bandwidth"`
+// 	// BillingMode's available values: bandwidth, traffic
+// 	BillingMode *string      `json:"billing_mode" name:"billing_mode"`
+// 	CreateTime  *time.Time   `json:"create_time" name:"create_time" format:"ISO 8601"`
+// 	Description *string      `json:"description" name:"description"`
+// 	EIPAddr     *string      `json:"eip_addr" name:"eip_addr"`
+// 	EIPGroup    *EIPGroup    `json:"eip_group" name:"eip_group"`
+// 	EIPID       *string      `json:"eip_id" name:"eip_id"`
+// 	EIPName     *string      `json:"eip_name" name:"eip_name"`
+// 	ICPCodes    *string      `json:"icp_codes" name:"icp_codes"`
+// 	NeedICP     *int         `json:"need_icp" name:"need_icp"`
+// 	Resource    *EIPResource `json:"resource" name:"resource"`
+// 	// Status's available values: pending, available, associated, suspended, released, ceased
+// 	Status     *string    `json:"status" name:"status"`
+// 	StatusTime *time.Time `json:"status_time" name:"status_time" format:"ISO 8601"`
+// 	SubCode    *int       `json:"sub_code" name:"sub_code"`
+// 	Tags       []*Tag     `json:"tags" name:"tags"`
+// 	// TransitionStatus's available values: associating, dissociating, suspending, resuming, releasing
+// 	TransitionStatus *string `json:"transition_status" name:"transition_status"`
+
+func (self EIP) GetCreateTime() time.Time {
+	return TimeValue(self.CreateTime)
+}
+func (self EIP) GetDescription() string {
+	return StringValue(self.Description)
+}
+
+func (self EIP) GetAlarmStatus() string {
+	return StringValue(self.AlarmStatus)
+}
+func (self EIP) GetEIPID() string {
+	return StringValue(self.EIPID)
+}
+
+func (self EIP) GetEIPName() string {
+	return StringValue(self.EIPName)
+}
+func (self EIP) GetEIPStatus() string {
+	return StringValue(self.Status)
+}
+func (self EIP) GetEIPAddr() string {
+	return StringValue(self.EIPAddr)
+}
+func (self EIP) GetBandwidth() int {
+	return IntValue(self.Bandwidth)
+}
+func (self EIP) GetBillingMode() string {
+	return StringValue(self.BillingMode)
+}
+
+func (self EIPResource) GetResourceID() string {
+	return StringValue(self.ResourceID)
+}
+func (self EIPResource) GetResourceName() string {
+	return StringValue(self.ResourceName)
+}
+
+func (self EIPResource) GetResourceType() string {
+	return StringValue(self.ResourceType)
 }

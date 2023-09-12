@@ -6,7 +6,7 @@ Each API function take a Input struct and return an Output struct. The Input str
 
 ``` go
 import (
-	qc "github.com/yunify/qingcloud-sdk-go/service"
+	qc "github.com/hewenxiang/shanhe-sdk-go/service"
 )
 ```
 

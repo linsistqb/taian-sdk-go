@@ -264,3 +264,191 @@ func TimeValueMap(src map[string]*time.Time) map[string]time.Time {
 	}
 	return dst
 }
+func ImageValue(v *Image) Image {
+	if v != nil {
+		return *v
+	}
+	return Image{}
+}
+func ImageValueSlice(src []*Image) []Image {
+	dst := make([]Image, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+func InstanceValue(v *Instance) Instance {
+	if v != nil {
+		return *v
+	}
+	return Instance{}
+}
+func InstanceValueSlice(src []*Instance) []Instance {
+	dst := make([]Instance, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+func TagValueSlice(src []*Tag) []Tag {
+	dst := make([]Tag, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+func VolumeValueSlice(src []*Volume) []Volume {
+	dst := make([]Volume, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+func VolumeValue(v *Volume) Volume {
+	if v != nil {
+		return *v
+	}
+	return Volume{}
+}
+func EIPResourceValue(v *EIPResource) EIPResource {
+	if v != nil {
+		return *v
+	}
+	return EIPResource{}
+}
+func EIPValue(v *EIP) EIP {
+	if v != nil {
+		return *v
+	}
+	return EIP{}
+}
+func EIPValueSlice(src []*EIP) []EIP {
+	dst := make([]EIP, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+
+func DNSAliasValueSlice(src []*DNSAlias) []DNSAlias {
+	dst := make([]DNSAlias, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+func ExtraValue(v *Extra) Extra {
+	if v != nil {
+		return *v
+	}
+	return Extra{}
+}
+func SecurityGroupValue(v *SecurityGroup) SecurityGroup {
+	if v != nil {
+		return *v
+	}
+	return SecurityGroup{}
+}
+
+func SecurityGroupValueSlice(src []*SecurityGroup) []SecurityGroup {
+	dst := make([]SecurityGroup, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+func NICVxNetValue(v *NICVxNet) NICVxNet {
+	if v != nil {
+		return *v
+	}
+	return NICVxNet{}
+}
+
+func NICVxNetValueSlice(src []*NICVxNet) []NICVxNet {
+	dst := make([]NICVxNet, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+func ResourceValue(v *Resource) Resource {
+	if v != nil {
+		return *v
+	}
+	return Resource{}
+}
+
+func ResourceValueSlice(src []*Resource) []Resource {
+	dst := make([]Resource, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+func InstanceTypeValue(v *InstanceType) InstanceType {
+	if v != nil {
+		return *v
+	}
+	return InstanceType{}
+}
+
+func InstanceTypeValueSlice(src []*InstanceType) []InstanceType {
+	dst := make([]InstanceType, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+
+func KeyPairValue(v *KeyPair) KeyPair {
+	if v != nil {
+		return *v
+	}
+	return KeyPair{}
+}
+
+func KeyPairValueSlice(src []*KeyPair) []KeyPair {
+	dst := make([]KeyPair, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}
+
+func SnapshotResourceValue(v *SnapshotResource) SnapshotResource {
+	if v != nil {
+		return *v
+	}
+	return SnapshotResource{}
+}
+func VxNetValueSlice(src []*VxNet) []VxNet {
+	dst := make([]VxNet, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}

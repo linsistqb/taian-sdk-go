@@ -1,9 +1,9 @@
 # QingCloud SDK for Go
 
-[![Build Status](https://travis-ci.org/yunify/qingcloud-sdk-go.svg?branch=master)](https://travis-ci.org/yunify/qingcloud-sdk-go)
-[![Go Report Card](https://goreportcard.com/badge/github.com/yunify/qingcloud-sdk-go)](https://goreportcard.com/report/github.com/yunify/qingcloud-sdk-go)
+[![Build Status](https://travis-ci.org/hewenxiang/shanhe-sdk-go.svg?branch=master)](https://travis-ci.org/hewenxiang/shanhe-sdk-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/hewenxiang/shanhe-sdk-go)](https://goreportcard.com/report/github.com/hewenxiang/shanhe-sdk-go)
 [![API Reference](http://img.shields.io/badge/api-reference-green.svg)](http://docs.qingcloud.com)
-[![License](http://img.shields.io/badge/license-apache%20v2-blue.svg)](https://github.com/yunify/qingcloud-sdk-go/blob/master/LICENSE)
+[![License](http://img.shields.io/badge/license-apache%20v2-blue.svg)](https://github.com/hewenxiang/shanhe-sdk-go/blob/master/LICENSE)
 
 The official QingCloud SDK for the Go programming language.
 
@@ -31,7 +31,7 @@ Now you are ready to code. You can read the detailed guides in the list below to
 - [Configuration Guide](docs/configuration.md)
 - [QingCloud Service Usage Guide](docs/qingcloud_service_usage.md)
 
-Checkout our [releases](https://github.com/yunify/qingcloud-sdk-go/releases) and [change logs](https://github.com/yunify/qingcloud-sdk-go/blob/master/CHANGELOG.md) for information about the latest features, bug fixes and new ideas.
+Checkout our [releases](https://github.com/hewenxiang/shanhe-sdk-go/releases) and [change logs](https://github.com/hewenxiang/shanhe-sdk-go/blob/master/CHANGELOG.md) for information about the latest features, bug fixes and new ideas.
 
 ## Reference Documentations
 
@@ -40,7 +40,7 @@ Checkout our [releases](https://github.com/yunify/qingcloud-sdk-go/releases) and
 
 ## Contributing
 
-1. Fork it ( https://github.com/yunify/qingcloud-sdk-go/fork )
+1. Fork it ( https://github.com/hewenxiang/shanhe-sdk-go/fork )
 2. Create your feature branch (`git checkout -b new-feature`)
 3. Commit your changes (`git commit -asm 'Add some feature'`)
 4. Push to the branch (`git push origin new-feature`)

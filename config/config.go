@@ -27,8 +27,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/logger"
-	"github.com/yunify/qingcloud-sdk-go/utils"
+	"github.com/hewenxiang/shanhe-sdk-go/logger"
+	"github.com/hewenxiang/shanhe-sdk-go/utils"
 )
 
 // A Config stores a configuration of this sdk.
@@ -46,14 +46,6 @@ type Config struct {
 	LogLevel string `yaml:"log_level"`
 
 	Zone string `yaml:"zone"`
-
-	CredentialProxyProtocol string `yaml:"credential_proxy_protocol"`
-	CredentialProxyHost     string `yaml:"credential_proxy_host"`
-	CredentialProxyPort     int    `yaml:"credential_proxy_port"`
-	CredentialProxyURI      string `yaml:"credential_proxy_uri"`
-
-	Token      string
-	Expiration int64
 
 	Connection *http.Client
 }

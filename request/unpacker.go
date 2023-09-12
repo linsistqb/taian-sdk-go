@@ -23,10 +23,10 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/yunify/qingcloud-sdk-go/logger"
-	"github.com/yunify/qingcloud-sdk-go/request/data"
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
-	"github.com/yunify/qingcloud-sdk-go/utils"
+	"github.com/hewenxiang/shanhe-sdk-go/logger"
+	"github.com/hewenxiang/shanhe-sdk-go/request/data"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/utils"
 )
 
 // Unpacker is the response unpacker.

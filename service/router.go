@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	"github.com/yunify/qingcloud-sdk-go/request"
-	"github.com/yunify/qingcloud-sdk-go/request/data"
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	"github.com/hewenxiang/shanhe-sdk-go/request"
+	"github.com/hewenxiang/shanhe-sdk-go/request/data"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
 )
 
 var _ fmt.State
@@ -1335,4 +1335,70 @@ type UpdateRoutersOutput struct {
 	Action  *string `json:"action" name:"action" location:"elements"`
 	JobID   *string `json:"job_id" name:"job_id" location:"elements"`
 	RetCode *int    `json:"ret_code" name:"ret_code" location:"elements"`
+}
+
+func (self Router) GetIsApplied() int {
+	return IntValue(self.IsApplied)
+}
+
+func (self Router) GetMode() int {
+	return IntValue(self.Mode)
+}
+
+func (self Router) GetRouterType() int {
+	return IntValue(self.RouterType)
+}
+func (self Router) GetInstance() EIP {
+	return EIPValue(self.EIP)
+}
+func (self Router) GetCreateTime() time.Time {
+	return TimeValue(self.CreateTime)
+}
+func (self Router) GetStatusTime() time.Time {
+	return TimeValue(self.StatusTime)
+}
+func (self Router) GetRouterDescription() string {
+	return StringValue(self.Description)
+}
+func (self Router) GetDYNIPEnd() string {
+	return StringValue(self.DYNIPEnd)
+}
+func (self Router) GetDYNIPStart() string {
+	return StringValue(self.DYNIPStart)
+}
+func (self Router) GetIPNetwork() string {
+	return StringValue(self.IPNetwork)
+}
+func (self Router) GetManagerIP() string {
+	return StringValue(self.ManagerIP)
+}
+func (self Router) GetPrivateIP() string {
+	return StringValue(self.PrivateIP)
+}
+func (self Router) GetRouterID() string {
+	return StringValue(self.RouterID)
+}
+func (self Router) GetRouterName() string {
+	return StringValue(self.RouterName)
+}
+func (self Router) GetSecurityGroupID() string {
+	return StringValue(self.SecurityGroupID)
+}
+func (self Router) GetRouterStatus() string {
+	return StringValue(self.Status)
+}
+func (self Router) GetTransitionStatus() string {
+	return StringValue(self.TransitionStatus)
+}
+func (self Router) GetVpcNetwork() string {
+	return StringValue(self.VpcNetwork)
+}
+func (self Router) GetVpcId() string {
+	return StringValue(self.VpcId)
+}
+func (self Router) GetRouterTags() []Tag {
+	return TagValueSlice(self.Tags)
+}
+func (self Router) GetVxNets() []VxNet {
+	return VxNetValueSlice(self.VxNets)
 }

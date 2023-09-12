@@ -2,7 +2,7 @@
 
 ## Summary
 
-This SDK uses a structure called "Config" to store and manage configuration, read ["config/config.go"](https://github.com/yunify/qingcloud-sdk-go/blob/master/config/config.go) file's comments of public functions for more information.
+This SDK uses a structure called "Config" to store and manage configuration, read ["config/config.go"](https://github.com/hewenxiang/shanhe-sdk-go/blob/master/config/config.go) file's comments of public functions for more information.
 
 Except for AccessKeyID and SecretAccessKey, you can also configure the API servers for private cloud usage scenario. All available configurable items are list in default configuration file.
 

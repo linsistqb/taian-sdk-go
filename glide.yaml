@@ -1,4 +1,4 @@
-package: github.com/yunify/qingcloud-sdk-go
+package: github.com/hewenxiang/shanhe-sdk-go
 import:
 - package: github.com/sirupsen/logrus
   version: ~1.0.2

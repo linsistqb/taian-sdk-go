@@ -19,8 +19,8 @@ package config
 import (
 	"testing"
 
+	"github.com/hewenxiang/shanhe-sdk-go/logger"
 	"github.com/stretchr/testify/assert"
-	"github.com/yunify/qingcloud-sdk-go/logger"
 )
 
 func TestConfig(t *testing.T) {

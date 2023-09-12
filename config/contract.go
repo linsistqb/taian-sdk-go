@@ -30,7 +30,7 @@ const DefaultConfigFileContent = `# QingCloud services configuration
 #qy_access_key_id: 'ACCESS_KEY_ID'
 #qy_secret_access_key: 'SECRET_ACCESS_KEY'
 
-host: 'api.qingcloud.com'
+host: 'api.shanhe.com'
 port: 443
 protocol: 'https'
 uri: '/iaas'

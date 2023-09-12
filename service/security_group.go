@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	"github.com/yunify/qingcloud-sdk-go/request"
-	"github.com/yunify/qingcloud-sdk-go/request/data"
-	"github.com/yunify/qingcloud-sdk-go/request/errors"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	"github.com/hewenxiang/shanhe-sdk-go/request"
+	"github.com/hewenxiang/shanhe-sdk-go/request/data"
+	"github.com/hewenxiang/shanhe-sdk-go/request/errors"
 )
 
 var _ fmt.State
@@ -140,7 +140,8 @@ func (s *SecurityGroupService) ApplySecurityGroup(i *ApplySecurityGroupInput) (*
 
 type ApplySecurityGroupInput struct {
 	Instances     []*string `json:"instances" name:"instances" location:"params"`
-	SecurityGroup *string   `json:"security_group" name:"security_group" location:"params"` // Required
+	SecurityGroup []*string `json:"security_group" name:"security_group" location:"params"` // Required
+
 }
 
 func (v *ApplySecurityGroupInput) Validate() error {
@@ -239,6 +240,7 @@ func (s *SecurityGroupService) CreateSecurityGroup(i *CreateSecurityGroupInput) 
 
 type CreateSecurityGroupInput struct {
 	SecurityGroupName *string `json:"security_group_name" name:"security_group_name" location:"params"`
+	IsTrusted         *int    `json:"is_trusted" name:"is_trusted" location:"params"`
 }
 
 func (v *CreateSecurityGroupInput) Validate() error {
@@ -1088,4 +1090,49 @@ type RollbackSecurityGroupOutput struct {
 	RetCode                 *int    `json:"ret_code" name:"ret_code" location:"elements"`
 	SecurityGroupID         *string `json:"security_group_id" name:"security_group_id" location:"elements"`
 	SecurityGroupSnapshotID *string `json:"security_group_snapshot_id" name:"security_group_snapshot_id" location:"elements"`
+}
+
+func (self DescribeSecurityGroupsOutput) GetMessage() string {
+	return StringValue(self.Message)
+}
+func (self DescribeSecurityGroupsOutput) GetAction() string {
+	return StringValue(self.Action)
+}
+func (self DescribeSecurityGroupsOutput) GetRetCode() int {
+	return IntValue(self.RetCode)
+}
+func (self DescribeSecurityGroupsOutput) GetSecurityGroupSet() []SecurityGroup {
+	return SecurityGroupValueSlice(self.SecurityGroupSet)
+}
+func (self DescribeSecurityGroupsOutput) GetTotalCount() int {
+	return IntValue(self.TotalCount)
+}
+
+func (self SecurityGroup) GetSecurityGroupID() string {
+	return StringValue(self.SecurityGroupID)
+}
+func (self SecurityGroup) GetSecurityGroupName() string {
+	return StringValue(self.SecurityGroupName)
+}
+
+func (self SecurityGroup) GetCPUTopology() []Resource {
+	return ResourceValueSlice(self.Resources)
+}
+func (self SecurityGroup) GetIsApplied() int {
+	return IntValue(self.IsApplied)
+}
+func (self SecurityGroup) GetIsDefault() int {
+	return IntValue(self.IsDefault)
+}
+func (self SecurityGroup) GetIsTrusted() int {
+	return IntValue(self.IsTrusted)
+}
+func (self SecurityGroup) GetSecurityGroupDescription() string {
+	return StringValue(self.Description)
+}
+func (self SecurityGroup) GetCreateTime() time.Time {
+	return TimeValue(self.CreateTime)
+}
+func (self SecurityGroup) GetSecurityGroupTags() []Tag {
+	return TagValueSlice(self.Tags)
 }

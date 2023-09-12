@@ -25,8 +25,8 @@ import (
 
 	"github.com/cucumber/godog"
 
-	"github.com/yunify/qingcloud-sdk-go/config"
-	qc "github.com/yunify/qingcloud-sdk-go/service"
+	"github.com/hewenxiang/shanhe-sdk-go/config"
+	qc "github.com/hewenxiang/shanhe-sdk-go/service"
 )
 
 func TestMain(m *testing.M) {

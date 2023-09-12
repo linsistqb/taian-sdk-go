@@ -22,8 +22,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/hewenxiang/shanhe-sdk-go/utils"
 	"github.com/stretchr/testify/assert"
-	"github.com/yunify/qingcloud-sdk-go/utils"
 )
 
 func TestSigner0(t *testing.T) {

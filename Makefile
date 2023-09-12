@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 .PHONY: all check vet lint update generate build unit test release clean
 
-PREFIX=qingcloud-sdk-go
+PREFIX=shanhe-sdk-go
 VERSION=$(shell cat version.go | grep "Version\ =" | sed -e s/^.*\ //g | sed -e s/\"//g)
 DIRS_TO_CHECK=$(shell ls -d */ | grep -vE "vendor|test")
 PKGS_TO_CHECK=$(shell go list ./... | grep -vE "vendor|test")

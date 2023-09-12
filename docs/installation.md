@@ -16,7 +16,7 @@ $ go get -u github.com/hewenxiang/shanhe-sdk-go
 
 You can also download a specified version of zipped source code in the repository [releases page](https://github.com/hewenxiang/shanhe-sdk-go/releases). The zipped source code only contains golang source code  without unit test files.
 
-___For example:___ _[qingcloud-sdk-go-source-v0.7.1.zip](https://github.com/hewenxiang/shanhe-sdk-go/releases/download/v0.7.1/qingcloud-sdk-go-source-v0.7.1.zip)_
+___For example:___ _[shanhe-sdk-go-source-v0.7.1.zip](https://github.com/hewenxiang/shanhe-sdk-go/releases/download/v0.7.1/shanhe-sdk-go-source-v0.7.1.zip)_
 
 ## Install from binary release
 
@@ -30,7 +30,7 @@ ___Notice:___ _We didn't provide 386 version binary packages, since there's almo
 
 ___Examples:___
 
-- *[qingcloud-sdk-go-header-v0.7.1-go-1.7.zip](https://github.com/hewenxiang/shanhe-sdk-go/releases/download/v0.7.1/qingcloud-sdk-go-header-v0.7.1-go-1.7.zip)*
-- *[qingcloud-sdk-go-binary-v0.7.1-linux_amd64-go-1.7.zip](https://github.com/hewenxiang/shanhe-sdk-go/releases/download/v0.7.1/qingcloud-sdk-go-binary-v0.7.1-linux_amd64-go-1.7.zip)*
-- *[qingcloud-sdk-go-binary-v0.7.1-darwin_amd64-go-1.7.zip](https://github.com/hewenxiang/shanhe-sdk-go/releases/download/v0.7.1/qingcloud-sdk-go-binary-v0.7.1-darwin_amd64-go-1.7.zip)*
-- *[qingcloud-sdk-go-binary-v0.7.1-windows_amd64-go-1.7.zip](https://github.com/hewenxiang/shanhe-sdk-go/releases/download/v0.7.1/qingcloud-sdk-go-binary-v0.7.1-windows_amd64-go-1.7.zip)*
+- *[shanhe-sdk-go-header-v0.7.1-go-1.7.zip](https://github.com/hewenxiang/shanhe-sdk-go/releases/download/v0.7.1/shanhe-sdk-go-header-v0.7.1-go-1.7.zip)*
+- *[shanhe-sdk-go-binary-v0.7.1-linux_amd64-go-1.7.zip](https://github.com/hewenxiang/shanhe-sdk-go/releases/download/v0.7.1/shanhe-sdk-go-binary-v0.7.1-linux_amd64-go-1.7.zip)*
+- *[shanhe-sdk-go-binary-v0.7.1-darwin_amd64-go-1.7.zip](https://github.com/hewenxiang/shanhe-sdk-go/releases/download/v0.7.1/shanhe-sdk-go-binary-v0.7.1-darwin_amd64-go-1.7.zip)*
+- *[shanhe-sdk-go-binary-v0.7.1-windows_amd64-go-1.7.zip](https://github.com/hewenxiang/shanhe-sdk-go/releases/download/v0.7.1/shanhe-sdk-go-binary-v0.7.1-windows_amd64-go-1.7.zip)*

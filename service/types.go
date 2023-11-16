@@ -1040,6 +1040,7 @@ type Instance struct {
 	Volumes          []*Volume   `json:"volumes" name:"volumes"`
 	VxNets           []*NICVxNet `json:"vxnets" name:"vxnets"`
 	ZoneID           *string     `json:"zone_id" name:"zone_id"`
+	LogicVolumes    []*Volume  `json:"logic_volumes" name:"logic_volumes"`
 }
 
 func (v *Instance) Validate() error {
@@ -1157,8 +1158,8 @@ type InstanceType struct {
 	ExtraInfo     *string `json:"extra_info" name:"extra_info"`
 }
 type InstanceTypeExtraInfo struct {
-	GpuClass *int `json:"gpu_class" name:"gpu_class"`
-	GpuCount *int `json:"gpu_count" name:"gpu_count"`
+	GpuClass *string `json:"gpu_class" name:"gpu_class"`
+	GpuCount *string `json:"gpu_count" name:"gpu_count"`
 }
 
 func (v *InstanceType) Validate() error {

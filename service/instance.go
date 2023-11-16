@@ -123,7 +123,9 @@ func (s *InstanceService) DescribeInstanceTypes(i *DescribeInstanceTypesInput) (
 }
 
 type DescribeInstanceTypesInput struct {
-	InstanceTypes []*string `json:"instance_types" name:"instance_types" location:"params"`
+	InstanceTypes    []*string `json:"instance_types" name:"instance_types" location:"params"`
+	InstanceTypeName *string   `json:"instance_type_name" name:"instance_type_name"`
+	ResourceType     *string   `json:"resource_type" name:"resource_type" location:"params"`
 }
 
 func (v *DescribeInstanceTypesInput) Validate() error {
@@ -570,7 +572,7 @@ type RunInstancesInput struct {
 	CPUMax *int `json:"cpu_max" name:"cpu_max" location:"params"`
 	// CPUModel's available values: Westmere, SandyBridge, IvyBridge, Haswell, Broadwell
 	CPUModel *string `json:"cpu_model" name:"cpu_model" default:"Westmere" location:"params"`
-	Gpu      *int    `json:"gpu" name:"gpu" default:"0" location:"params"`
+	Gpu      *string    `json:"gpu" name:"gpu" default:"0" location:"params"`
 	Hostname *string `json:"hostname" name:"hostname" location:"params"`
 	ImageID  *string `json:"image_id" name:"image_id" location:"params"` // Required
 	// InstanceClass's available values: 0, 1, 2, 3, 4, 5, 6, 100, 101, 200, 201, 300, 301
@@ -603,7 +605,7 @@ type RunInstancesInput struct {
 	AutoRenew     *int          `json:"auto_renew" name:"auto_renew" location:"params"`
 	AutoVolumes   []*DataVolume `json:"auto_volumes" name:"auto_volumes" location:"params"`
 	ChargeMode    *string       `json:"charge_mode" name:"charge_mode" location:"params"`
-	GpuClass      *int          `json:"gpu_class" name:"gpu_class" location:"params"`
+	GpuClass      *string          `json:"gpu_class" name:"gpu_class" location:"params"`
 	PlaceGroupID  *string       `json:"place_group_id" name:"place_group_id" location:"params"`
 }
 

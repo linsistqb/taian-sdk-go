@@ -74,10 +74,10 @@ func (s *MonitorService) GetMonitor(i *GetMonitorInput) (*GetMonitorOutput, erro
 }
 
 type GetMonitorInput struct {
-	EndTime   *time.Time `json:"end_time" name:"end_time" format:"ISO 8601" location:"params"`
+	EndTime   *string `json:"end_time" name:"end_time" format:"ISO 8601" location:"params"`
 	Meters    []*string  `json:"meters" name:"meters" location:"params"`
 	Resource  *string    `json:"resource" name:"resource" location:"params"`
-	StartTime *time.Time `json:"start_time" name:"start_time" format:"ISO 8601" location:"params"`
+	StartTime *string `json:"start_time" name:"start_time" format:"ISO 8601" location:"params"`
 	// Step's available values: 5m, 15m, 2h, 1d
 	Step *string `json:"step" name:"step" location:"params"`
 }
@@ -85,7 +85,7 @@ type GetMonitorInput struct {
 func (v *GetMonitorInput) Validate() error {
 
 	if v.Step != nil {
-		stepValidValues := []string{"5m", "15m", "2h", "1d"}
+		stepValidValues := []string{"10s","5m", "15m", "2h", "1d"}
 		stepParameterValue := fmt.Sprint(*v.Step)
 
 		stepIsValid := false

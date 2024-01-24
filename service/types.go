@@ -3489,3 +3489,13 @@ func (v *VIP) Validate() error {
 	// TODO
 	return nil
 }
+
+type Price struct {
+	AvailableCoupon *string `json:"available_coupon" name:"available_coupon"`
+	Discount        *int    `json:"discount" name:"discount"`
+	NormalPrice     *string `json:"normal_price" name:"normal_price"`
+	OriginalPrice   *string `json:"original_price" name:"original_price"`
+	Price           *string `json:"price" name:"price"`
+	Sequence         *int `json:"sequence" name:"sequence"`
+
+}

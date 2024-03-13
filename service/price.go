@@ -72,15 +72,18 @@ func (s *PriceService) DescribePrice(i *DescribePriceInput) (*DescribePriceOutpu
 }
 
 type Resources struct {
-	Type         *string `json:"duration" name:"duration" location:"params"`
+	Type         *string `json:"type" name:"type" location:"params"`
 	InstanceType *string `json:"instance_type" name:"instance_type" location:"params"`
-	ImageId    *string `json:"image_id" name:"image_id" default:"img-7vnii9pb" location:"params"`
-	Sequence   *int    `json:"sequence" name:"sequence" default:"0" location:"params"`
-	VolumeType *string `json:"volume_type" name:"volume_type" default:"0" location:"params"`
-	Size *int `json:"size" name:"size" location:"params"`
+	ImageId      *string `json:"image_id" name:"image_id" location:"params"`
+	ImageSize    *int    `json:"image_size" name:"image_size" location:"params"`
+	VolumeType   *int    `json:"volume_type" name:"volume_type" location:"params"`
+	Size         *int    `json:"size" name:"size" location:"params"`
+	Sequence     *int    `json:"sequence" name:"sequence" default:"0" location:"params"`
+	GpuClass     *int    `json:"gpu_class" name:"gpu_class"`
+	Gpu          *int    `json:"gpu" name:"gpu"`
 }
 type DescribePriceInput struct {
-	Resources []*Resources `json:"access_keys" name:"access_keys" location:"params"`
+	Resources []*Resources `json:"resources" name:"resources" location:"params"`
 	Duration  *int         `json:"duration" name:"duration" location:"params"`
 }
 
@@ -90,9 +93,8 @@ func (v *DescribePriceInput) Validate() error {
 }
 
 type DescribePriceOutput struct {
-	Message    *string  `json:"message" name:"message"`
-	Action     *string  `json:"action" name:"action" location:"elements"`
-	PriceSet   []*Price `json:"price_set" name:"price_set" location:"elements"`
-	RetCode    *int     `json:"ret_code" name:"ret_code" location:"elements"`
-
+	Message  *string  `json:"message" name:"message"`
+	Action   *string  `json:"action" name:"action" location:"elements"`
+	PriceSet []*Price `json:"price_set" name:"price_set" location:"elements"`
+	RetCode  *int     `json:"ret_code" name:"ret_code" location:"elements"`
 }

@@ -452,3 +452,21 @@ func VxNetValueSlice(src []*VxNet) []VxNet {
 	}
 	return dst
 }
+
+
+func ResourcesSlice(src []Resources) []*Resources {
+	dst := make([]*Resources, len(src))
+	for i := 0; i < len(src); i++ {
+		dst[i] = &(src[i])
+	}
+	return dst
+}
+func PriceSlice(src []*Price) []Price {
+	dst := make([]Price, len(src))
+	for i := 0; i < len(src); i++ {
+		if src[i] != nil {
+			dst[i] = *(src[i])
+		}
+	}
+	return dst
+}

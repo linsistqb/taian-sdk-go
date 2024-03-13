@@ -1040,7 +1040,7 @@ type Instance struct {
 	Volumes          []*Volume   `json:"volumes" name:"volumes"`
 	VxNets           []*NICVxNet `json:"vxnets" name:"vxnets"`
 	ZoneID           *string     `json:"zone_id" name:"zone_id"`
-	LogicVolumes    []*Volume  `json:"logic_volumes" name:"logic_volumes"`
+	LogicVolumes     []*Volume   `json:"logic_volumes" name:"logic_volumes"`
 }
 
 func (v *Instance) Validate() error {
@@ -1156,6 +1156,12 @@ type InstanceType struct {
 
 	InstanceClass *int    `json:"instance_class" name:"instance_class"`
 	ExtraInfo     *string `json:"extra_info" name:"extra_info"`
+	ResourceType  *string `json:"resource_type" name:"resource_type"`
+	InstanceStyle  *string `json:"instance_style" name:"instance_style"`
+
+	ResourceClass *int    `json:"resource_class" name:"resource_class"`
+	GpuClass      *int    `json:"gpu_class" name:"gpu_class"`
+	GpuCount *int `json:"gpu_count" name:"gpu_count"`
 }
 type InstanceTypeExtraInfo struct {
 	GpuClass *string `json:"gpu_class" name:"gpu_class"`
@@ -3491,11 +3497,10 @@ func (v *VIP) Validate() error {
 }
 
 type Price struct {
-	AvailableCoupon *string `json:"available_coupon" name:"available_coupon"`
-	Discount        *int    `json:"discount" name:"discount"`
-	NormalPrice     *string `json:"normal_price" name:"normal_price"`
-	OriginalPrice   *string `json:"original_price" name:"original_price"`
-	Price           *string `json:"price" name:"price"`
-	Sequence         *int `json:"sequence" name:"sequence"`
-
+	AvailableCoupon *string  `json:"available_coupon" name:"available_coupon"`
+	Discount        *float32 `json:"discount" name:"discount"`
+	NormalPrice     *string  `json:"normal_price" name:"normal_price"`
+	OriginalPrice   *string  `json:"original_price" name:"original_price"`
+	Price           *string  `json:"price" name:"price"`
+	Sequence        *int     `json:"sequence" name:"sequence"`
 }

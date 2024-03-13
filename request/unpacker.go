@@ -74,7 +74,7 @@ func (u *Unpacker) parseResponse() error {
 				"Response json string: [%d] %s",
 				utils.StringToUnixInt(u.httpResponse.Header.Get("Date"), "RFC 822"),
 				string(buffer.Bytes())))
-
+			// fmt.Println(string(buffer.Bytes()))
 			_, err := utils.JSONDecode(buffer.Bytes(), u.output.Interface())
 			if err != nil {
 				return err
@@ -88,6 +88,7 @@ func (u *Unpacker) parseResponse() error {
 		u.httpResponse.Body.Close()
 		err := fmt.Errorf("Response StatusCode: %d", u.httpResponse.StatusCode)
 		logger.Error(err.Error())
+
 		return err
 	}
 

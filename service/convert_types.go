@@ -371,15 +371,6 @@ func SecurityGroupValueSlice(src []*SecurityGroup) []SecurityGroup {
 	}
 	return dst
 }
-func SecurityGroupValueRuleSlice(src []*SecurityGroupRule) []SecurityGroupRule {
-	dst := make([]SecurityGroupRule, len(src))
-	for i := 0; i < len(src); i++ {
-		if src[i] != nil {
-			dst[i] = *(src[i])
-		}
-	}
-	return dst
-}
 func NICVxNetValue(v *NICVxNet) NICVxNet {
 	if v != nil {
 		return *v

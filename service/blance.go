@@ -79,6 +79,7 @@ type DescribeBalanceInput struct {
 	SearchWord *string   `json:"search_word" name:"search_word" location:"params"`
 	Status     []*string `json:"status" name:"status" location:"params"`
 	Verbose    *int      `json:"verbose" name:"verbose" default:"0" location:"params"`
+	Zone       *string   `json:"zone" name:"zone"` // Required
 }
 
 func (v *DescribeBalanceInput) Validate() error {
@@ -87,11 +88,11 @@ func (v *DescribeBalanceInput) Validate() error {
 }
 
 type DescribeBalanceOutput struct {
-	Action   *string `json:"action" name:"action" location:"elements"`
-	Balance  *string
-	Bonus    *string
-	RetCode  *int `json:"ret_code" name:"ret_code" location:"elements"`
-	UserId   *string
-	Coupons  []*string
+	Action  *string `json:"action" name:"action" location:"elements"`
+	Balance *string
+	Bonus   *string
+	RetCode *int    `json:"ret_code" name:"ret_code" location:"elements"`
+	UserId  *string `json:"user_id" name:"user_id" location:"elements"`
+
 	PaidMode *string `json:"paid_mode" name:"paid_mode" location:"elements"`
 }

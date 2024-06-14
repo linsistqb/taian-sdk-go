@@ -1009,25 +1009,26 @@ func (v *ImageUser) Validate() error {
 }
 
 type Instance struct {
-	AlarmStatus      *string        `json:"alarm_status" name:"alarm_status"`
-	CPUTopology      *string        `json:"cpu_topology" name:"cpu_topology"`
-	CreateTime       *time.Time     `json:"create_time" name:"create_time" format:"ISO 8601"`
-	Description      *string        `json:"description" name:"description"`
-	Device           *string        `json:"device" name:"device"`
-	DNSAliases       []*DNSAlias    `json:"dns_aliases" name:"dns_aliases"`
-	EIP              *EIP           `json:"eip" name:"eip"`
-	Extra            *Extra         `json:"extra" name:"extra"`
-	GraphicsPasswd   *string        `json:"graphics_passwd" name:"graphics_passwd"`
-	GraphicsProtocol *string        `json:"graphics_protocol" name:"graphics_protocol"`
-	Image            *Image         `json:"image" name:"image"`
-	InstanceClass    *int           `json:"instance_class" name:"instance_class"`
-	InstanceID       *string        `json:"instance_id" name:"instance_id"`
-	InstanceName     *string        `json:"instance_name" name:"instance_name"`
-	InstanceType     *string        `json:"instance_type" name:"instance_type"`
-	KeyPairIDs       []*string      `json:"keypair_ids" name:"keypair_ids"`
-	MemoryCurrent    *int           `json:"memory_current" name:"memory_current"`
-	Repl             *string        `json:"repl" name:"repl"`
-	SecurityGroup    *SecurityGroup `json:"security_group" name:"security_group"`
+	AlarmStatus      *string          `json:"alarm_status" name:"alarm_status"`
+	CPUTopology      *string          `json:"cpu_topology" name:"cpu_topology"`
+	CreateTime       *time.Time       `json:"create_time" name:"create_time" format:"ISO 8601"`
+	Description      *string          `json:"description" name:"description"`
+	Device           *string          `json:"device" name:"device"`
+	DNSAliases       []*DNSAlias      `json:"dns_aliases" name:"dns_aliases"`
+	EIP              *EIP             `json:"eip" name:"eip"`
+	Extra            *Extra           `json:"extra" name:"extra"`
+	GraphicsPasswd   *string          `json:"graphics_passwd" name:"graphics_passwd"`
+	GraphicsProtocol *string          `json:"graphics_protocol" name:"graphics_protocol"`
+	Image            *Image           `json:"image" name:"image"`
+	InstanceClass    *int             `json:"instance_class" name:"instance_class"`
+	InstanceID       *string          `json:"instance_id" name:"instance_id"`
+	InstanceName     *string          `json:"instance_name" name:"instance_name"`
+	InstanceType     *string          `json:"instance_type" name:"instance_type"`
+	KeyPairIDs       []*string        `json:"keypair_ids" name:"keypair_ids"`
+	MemoryCurrent    *int             `json:"memory_current" name:"memory_current"`
+	Repl             *string          `json:"repl" name:"repl"`
+	SecurityGroup    *SecurityGroup   `json:"security_group" name:"security_group"`
+	SecurityGroups   []*SecurityGroup `json:"security_groups" name:"security_groups"`
 	// Status's available values: pending, running, stopped, suspended, terminated, ceased
 	Status     *string    `json:"status" name:"status"`
 	StatusTime *time.Time `json:"status_time" name:"status_time" format:"ISO 8601"`
@@ -1157,11 +1158,11 @@ type InstanceType struct {
 	InstanceClass *int    `json:"instance_class" name:"instance_class"`
 	ExtraInfo     *string `json:"extra_info" name:"extra_info"`
 	ResourceType  *string `json:"resource_type" name:"resource_type"`
-	InstanceStyle  *string `json:"instance_style" name:"instance_style"`
+	InstanceStyle *string `json:"instance_style" name:"instance_style"`
 
-	ResourceClass *int    `json:"resource_class" name:"resource_class"`
-	GpuClass      *int    `json:"gpu_class" name:"gpu_class"`
-	GpuCount *int `json:"gpu_count" name:"gpu_count"`
+	ResourceClass *int `json:"resource_class" name:"resource_class"`
+	GpuClass      *int `json:"gpu_class" name:"gpu_class"`
+	GpuCount      *int `json:"gpu_count" name:"gpu_count"`
 }
 type InstanceTypeExtraInfo struct {
 	GpuClass *string `json:"gpu_class" name:"gpu_class"`
@@ -3470,7 +3471,143 @@ type Quota struct {
 	Loadbalancer            *int `json:"loadbalancer" name:"loadbalancer"`
 	ClusterHpInstance       *int `json:"cluster_hp_instance" name:"cluster_hp_instance"`
 }
+type AllQuota struct {
+	AppCenter       *AppCenter       `json:"AppCenter" name:"AppCenter"`
+	Container       *Container       `json:"container" name:"container"`
+	Calculate       *Calculate       `json:"calculate" name:"calculate"`
+	StorageService  *StorageService  `json:"storage_service" name:"storage_service"`
+	NetworkService  *NetworkService  `json:"network_service" name:"network_service"`
+	SecurityService *SecurityService `json:"security_service" name:"security_service"`
+}
+type QuotaItem struct {
+	SubUserAcquired   *int `json:"sub_user_acquired" name:"sub_user_acquired"`
+	RootUserUsed      *int `json:"root_user_used" name:"root_user_used"`
+	SharedSubUserUsed *int `json:"shared_sub_user_used" name:"shared_sub_user_used"`
+	RootUserAcquired  *int `json:"root_user_acquired" name:"root_user_acquired"`
+}
+type AppCenter struct {
+	AppCluster *AppCluster `json:"app_cluster" name:"app_cluster"`
+}
+type AppCluster struct {
+	Cluster           *QuotaItem `json:"cluster" name:"cluster"`
+	ClusterCpu        *QuotaItem `json:"cluster_cpu" name:"cluster_cpu"`
+	ClusterVolumeSize *QuotaItem `json:"cluster_volume_size" name:"cluster_volume_size"`
+	ClusterMemory     *QuotaItem `json:"cluster_memory" name:"cluster_memory"`
+	ClusterVolume     *QuotaItem `json:"cluster_volume" name:"cluster_volume"`
+}
+type Container struct {
+	ContainerExample *ContainerExample `json:"container_example" name:"container_example"`
+}
 
+type ContainerExample struct {
+	ContainerGroup   *QuotaItem `json:"container_group" name:"container_group"`
+	HpContainerGroup *QuotaItem `json:"hp_container_group" name:"hp_container_group"`
+	ImageCache       *QuotaItem `json:"image_cache" name:"image_cache"`
+}
+
+type Calculate struct {
+	Image         *CalculateImage         `json:"image" name:"image"`
+	InstanceGroup *CalculateInstanceGroup `json:"instance_group" name:"instance_group"`
+	Keypair       *CalculateKeypair       `json:"keypair" name:"keypair"`
+	CloudService  *CalculateCloudService  `json:"cloud_service" name:"cloud_service"`
+}
+type CalculateImage struct {
+	Image *QuotaItem `json:"image" name:"image"`
+}
+type CalculateInstanceGroup struct {
+	InstanceGroup *QuotaItem `json:"instance_group" name:"instance_group"`
+}
+type CalculateKeypair struct {
+	Keypair *QuotaItem `json:"keypair" name:"keypair"`
+}
+type CalculateCloudService struct {
+	BmInstance       *QuotaItem `json:"bm_instance" name:"bm_instance"`
+	Instance         *QuotaItem `json:"instance" name:"instance"`
+	GpuPassthrough   *QuotaItem `json:"gpu_passthrough" name:"gpu_passthrough"`
+	Memory           *QuotaItem `json:"memory" name:"memory"`
+	Cpu              *QuotaItem `json:"cpu" name:"cpu"`
+	HpGpuPassthrough *QuotaItem `json:"hp_gpu_passthrough" name:"hp_gpu_passthrough"`
+}
+type StorageService struct {
+	HardDdisk *StorageServiceHardDdisk `json:"hard_disk" name:"hard_disk"`
+	Epfs      *StorageServiceEpfs      `json:"epfs" name:"epfs"`
+}
+
+type StorageServiceHardDdisk struct {
+	VolumeTpsc      *QuotaItem `json:"volume_tpsc" name:"volume_tpsc"`
+	VolumeSancSize  *QuotaItem `json:"volume_sanc_size" name:"volume_sanc_size"`
+	VolumeSize      *QuotaItem `json:"volume_size" name:"volume_size"`
+	VolumeSsdSize   *QuotaItem `json:"volume_ssd_size" name:"volume_ssd_size"`
+	CloudVolumeSize *QuotaItem `json:"cloud_volume_size" name:"cloud_volume_size"`
+	CloudVolume     *QuotaItem `json:"cloud_volume" name:"cloud_volume"`
+	VolumeSanc      *QuotaItem `json:"volume_sanc" name:"volume_sanc"`
+	Volume          *QuotaItem `json:"volume" name:"volume"`
+	VolumeTpscSize  *QuotaItem `json:"volume_tpsc_size" name:"volume_tpsc_size"`
+	VolumeSsd       *QuotaItem `json:"volume_ssd" name:"volume_ssd"`
+}
+type StorageServiceEpfs struct {
+	MountPoint     *QuotaItem `json:"mount_point" name:"mount_point"`
+	MountTotalSize *QuotaItem `json:"mount_total_size" name:"mount_total_size"`
+}
+type NetworkService struct {
+	Eip             *NetworkServiceEIP             `json:"eip" name:"eip"`
+	NetOther        *NetworkServiceNetOther        `json:"net_other" name:"net_other"`
+	VpcNetwork      *NetworkServiceVpcNetwork      `json:"vpc_network" name:"vpc_network"`
+	IntranetRouter  *NetworkServiceIntranetRouter  `json:"intranet_router" name:"intranet_router"`
+	Vxnet           *NetworkServiceVxnet           `json:"vxnet" name:"vxnet"`
+	RoutingTableNfv *NetworkServiceRoutingTableNfv `json:"routing_table_nfv" name:"routing_table_nfv"`
+	Loadbalancer    *NetworkServiceLoadbalancer    `json:"loadbalancer" name:"loadbalancer"`
+}
+type NetworkServiceEIP struct {
+	Ipv6EipBandwidth *QuotaItem `json:"ipv6_eip_bandwidth" name:"ipv6_eip_bandwidth"`
+	Eip              *QuotaItem `json:"eip" name:"eip"`
+	VbcEip           *QuotaItem `json:"vbc_eip" name:"vbc_eip"`
+	Ipv6Eip          *QuotaItem `json:"ipv6_eip" name:"ipv6_eip"`
+	EipBandwidth     *QuotaItem `json:"eip_bandwidth" name:"eip_bandwidth"`
+}
+
+type NetworkServiceNetOther struct {
+	Span     *QuotaItem `json:"span" name:"span"`
+	DnsAlias *QuotaItem `json:"dns_alias" name:"dns_alias"`
+}
+type NetworkServiceVpcNetwork struct {
+	VpcBorder       *QuotaItem `json:"vpc_border" name:"vpc_border"`
+	NetworkAclEntry *QuotaItem `json:"network_acl_entry" name:"network_acl_entry"`
+	VpcMaxVxnetCnt  *QuotaItem `json:"vpc_max_vxnet_cnt" name:"vpc_max_vxnet_cnt"`
+	Router          *QuotaItem `json:"router" name:"router"`
+}
+
+type NetworkServiceIntranetRouter struct {
+	IntranetRouter *QuotaItem `json:"intranet_router" name:"intranet_router"`
+}
+
+type NetworkServiceVxnet struct {
+	MultizoneVxnet *QuotaItem `json:"multizone_vxnet" name:"multizone_vxnet"`
+	BmVxnet        *QuotaItem `json:"bm_vxnet" name:"bm_vxnet"`
+	Vxnet          *QuotaItem `json:"vxnet" name:"vxnet"`
+}
+type NetworkServiceRoutingTableNfv struct {
+	Nfv          *QuotaItem `json:"nfv" name:"nfv"`
+	RoutingTable *QuotaItem `json:"routing_table" name:"routing_table"`
+}
+type NetworkServiceLoadbalancer struct {
+	MultizoneLoadbalancer *QuotaItem `json:"multizone_loadbalancer" name:"multizone_loadbalancer"`
+	LoadbalancerPolicy    *QuotaItem `json:"loadbalancer_policy" name:"loadbalancer_policy"`
+	Loadbalancer          *QuotaItem `json:"loadbalancer" name:"loadbalancer"`
+}
+
+type SecurityService struct {
+	Ssl      *SecurityServiceSsl      `json:"ssl" name:"ssl"`
+	Security *SecurityServiceSecurity `json:"security" name:"security"`
+}
+type SecurityServiceSsl struct {
+	CreateOrderCnt     *QuotaItem `json:"create_order_cnt" name:"create_order_cnt"`
+	FreeCertificateCnt *QuotaItem `json:"free_certificate_cnt" name:"free_certificate_cnt"`
+}
+type SecurityServiceSecurity struct {
+	SecurityGroup      *QuotaItem `json:"security_group" name:"security_group"`
+	SecurityGroupIpset *QuotaItem `json:"security_group_ipset" name:"security_group_ipset"`
+}
 type ZoneLeftUse struct {
 	Jn1 *int `json:"jn1" name:"jn1"`
 	Jn2 *int `json:"jn2" name:"jn1"`

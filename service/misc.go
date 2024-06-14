@@ -182,3 +182,71 @@ type DescribeQuotasOutput struct {
 	RetCode    *int     `json:"ret_code" name:"ret_code" location:"elements"`
 	TotalCount *int     `json:"total_count" name:"total_count" location:"elements"`
 }
+
+func (s *MiscService) DescribeAllQuotas(i *DescribeAllQuotasInput) (*DescribeAllQuotasOutput, error) {
+	if i == nil {
+		i = &DescribeAllQuotasInput{}
+	}
+	o := &data.Operation{
+		Config:        s.Config,
+		Properties:    s.Properties,
+		APIName:       "DescribeAllQuota",
+		RequestMethod: "GET",
+	}
+
+	x := &DescribeAllQuotasOutput{}
+	r, err := request.New(o, i, x)
+	if err != nil {
+		return nil, err
+	}
+
+	err = r.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return x, err
+}
+func (s *MiscService) DescribeSubQuotas(i *DescribeAllQuotasInput) (*DescribeAllQuotasOutput, error) {
+	if i == nil {
+		i = &DescribeAllQuotasInput{}
+	}
+	o := &data.Operation{
+		Config:        s.Config,
+		Properties:    s.Properties,
+		APIName:       "DescribeSubQuotas",
+		RequestMethod: "GET",
+	}
+
+	x := &DescribeAllQuotasOutput{}
+	r, err := request.New(o, i, x)
+	if err != nil {
+		return nil, err
+	}
+
+	err = r.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return x, err
+}
+
+type DescribeAllQuotasInput struct {
+	Zone *string `json:"zone" name:"zone" location:"params"`
+	User *string `json:"user" name:"user" location:"params"`
+
+}
+
+func (v *DescribeAllQuotasInput) Validate() error {
+
+	return nil
+}
+
+type DescribeAllQuotasOutput struct {
+	Message    *string   `json:"message" name:"message"`
+	Action     *string   `json:"action" name:"action" location:"elements"`
+	QuotaSet   *AllQuota `json:"quota_set" name:"quota_set" location:"elements"`
+	RetCode    *int      `json:"ret_code" name:"ret_code" location:"elements"`
+	TotalCount *int      `json:"total_count" name:"total_count" location:"elements"`
+}

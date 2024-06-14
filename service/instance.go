@@ -1303,3 +1303,6 @@ func (self InstanceType) GetVCPUsCurrent() int {
 func (self InstanceType) GetInstanceTypeZoneID() string {
 	return StringValue(self.ZoneID)
 }
+func (self Instance) GetSecurityGroups() []SecurityGroup {
+	return SecurityGroupValueSlice(self.SecurityGroups)
+}

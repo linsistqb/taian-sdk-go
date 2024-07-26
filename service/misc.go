@@ -235,7 +235,6 @@ func (s *MiscService) DescribeSubQuotas(i *DescribeAllQuotasInput) (*DescribeAll
 type DescribeAllQuotasInput struct {
 	Zone *string `json:"zone" name:"zone" location:"params"`
 	User *string `json:"user" name:"user" location:"params"`
-
 }
 
 func (v *DescribeAllQuotasInput) Validate() error {

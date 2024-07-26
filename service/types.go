@@ -2397,6 +2397,7 @@ type Router struct {
 	TransitionStatus *string  `json:"transition_status" name:"transition_status"`
 	VpcNetwork       *string  `json:"vpc_network" name:"vpc_network"`
 	VpcId            *string  `json:"vpc_id" name:"vpc_id"`
+	Features         *int     `json:"features" name:"features"`
 	VxNets           []*VxNet `json:"vxnets" name:"vxnets"`
 }
 

@@ -582,7 +582,7 @@ func (self EIP) GetEIPStatus() string {
 func (self EIP) GetEIPAddr() string {
 	return StringValue(self.EIPAddr)
 }
-func (self EIP) GetBandwidth() int {
+func (self EIP) GetEIPBandwidth() int {
 	return IntValue(self.Bandwidth)
 }
 func (self EIP) GetBillingMode() string {

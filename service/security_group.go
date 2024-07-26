@@ -1136,3 +1136,6 @@ func (self SecurityGroup) GetCreateTime() time.Time {
 func (self SecurityGroup) GetSecurityGroupTags() []Tag {
 	return TagValueSlice(self.Tags)
 }
+func (self Instance) GetSecurityGroups() []SecurityGroup {
+	return SecurityGroupValueSlice(self.SecurityGroups)
+}

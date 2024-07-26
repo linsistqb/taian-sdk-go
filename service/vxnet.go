@@ -287,7 +287,7 @@ func (v *DescribeVxNetsInput) Validate() error {
 	}
 
 	if v.VxNetType != nil {
-		vxnetTypeValidValues := []string{"0", "1"}
+		vxnetTypeValidValues := []string{"0", "1","2"}
 		vxnetTypeParameterValue := fmt.Sprint(*v.VxNetType)
 
 		vxnetTypeIsValid := false

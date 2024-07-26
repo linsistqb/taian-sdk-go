@@ -435,7 +435,7 @@ type ResizeInstancesInput struct {
 func (v *ResizeInstancesInput) Validate() error {
 
 	if v.CPU != nil {
-		cpuValidValues := []string{"1", "2", "4", "8", "16"}
+		cpuValidValues := []string{"1", "2", "4", "8","12", "16","24","32","64","96","128"}
 		cpuParameterValue := fmt.Sprint(*v.CPU)
 
 		cpuIsValid := false
@@ -462,7 +462,8 @@ func (v *ResizeInstancesInput) Validate() error {
 	}
 
 	if v.Memory != nil {
-		memoryValidValues := []string{"1024", "2048", "4096", "6144", "8192", "12288", "16384", "24576", "32768"}
+		memoryValidValues := []string{"1024", "2048", "4096", "6144", "8192", "12288", "16384", 
+		"24576", "32768","49152","65536","98304","131072","196608","262144","393216","524288"}
 		memoryParameterValue := fmt.Sprint(*v.Memory)
 
 		memoryIsValid := false
@@ -1302,7 +1303,4 @@ func (self InstanceType) GetVCPUsCurrent() int {
 }
 func (self InstanceType) GetInstanceTypeZoneID() string {
 	return StringValue(self.ZoneID)
-}
-func (self Instance) GetSecurityGroups() []SecurityGroup {
-	return SecurityGroupValueSlice(self.SecurityGroups)
 }

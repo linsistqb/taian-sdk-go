@@ -1,4 +1,4 @@
-module github.com/hewenxiang/shanhe-sdk-go
+module github.com/linsistqb/taian-sdk-go
 
 go 1.13
 
